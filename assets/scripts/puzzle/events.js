@@ -10,19 +10,19 @@ function checkResult (array) {
     $('td[id=2]').css('textDecoration', 'line-through')
     $('td[id=4]').css('textDecoration', 'line-through')
     $('td[id=6]').css('textDecoration', 'line-through')
-    return 'You win'
+    return true
   } else if ((array[0] === array[4]) && (array[4] === array[8]) && array[0] !== '' && array[4] !== '' && array[8] !== '') {
     console.log('You win')
-    return 'You win'
+    return true
   } else if ((array[0] === array[3]) && (array[3] === array[6]) && array[0] !== '' && array[3] !== '' && array[6] !== '') {
     console.log('You win')
-    return 'You win'
+    return true
   } else if ((array[1] === array[4]) && (array[4] === array[7]) && array[1] !== '' && array[4] !== '' && array[7] !== '') {
     console.log('You win')
-    return 'You win'
+    return true
   } else if ((array[2] === array[5]) && (array[5] === array[8]) && array[2] !== '' && array[5] !== '' && array[8] !== '') {
     console.log('You win')
-    return 'You win'
+    return true
   } else {
     let i = 0
     let tempArray = []
@@ -31,7 +31,7 @@ function checkResult (array) {
       if (tempArray.length === 3) {
         if ((tempArray[0] === tempArray[1]) && (tempArray[1] === tempArray[2]) && tempArray[0] !== '' && tempArray[1] !== '' && tempArray[2] !== '') {
           console.log('You win')
-          return 'You win'
+          return true
         } else {
           tempArray = []
         }
@@ -39,6 +39,7 @@ function checkResult (array) {
       i++
     }
   }
+  return false
 }
 
 let currentSymbol = 'o'
@@ -56,6 +57,11 @@ const onInsertSymbol = function (event) {
       const result = checkResult(cells)
       console.log(cells)
       console.log(result)
+      if (result) {
+        $('#lbl-message').text('X wins!').css({'color': 'green', 'background-color': 'white'})
+      } else {
+        $('#lbl-message').text("It's O's turn!").css({'color': '#F0650E', 'background-color': 'white'})
+      }
     } else {
       currentSymbol = 'o'
       event.target.append(currentSymbol)
@@ -63,9 +69,14 @@ const onInsertSymbol = function (event) {
       const result = checkResult(cells)
       console.log(cells)
       console.log(result)
+      if (result) {
+        $('#lbl-message').text('O wins!').css({'color': 'green', 'background-color': 'white'})
+      } else {
+        $('#lbl-message').text("It's X's turn").css({'color': '#F0650E', 'background-color': 'white'})
+      }
     }
   } else {
-    $('#lbl-message').text('Invalid click.').css('color', 'red')
+    $('#lbl-message').text('Invalid click.').css({'color': 'red', 'background-color': 'white'})
   }
   // const clickedCell = $(event.target).closest('td')
   // clickedCell.Add('o')
