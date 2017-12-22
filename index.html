@@ -12,14 +12,91 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body class="container-fluid">
-      <h1>Example</h1>
+      <header>
+	       <h1>Tic-tac-toe</h1>
+      </header>
+    <nav>
+      <a href="#main">Instructions</a>
+      <a href="#game-board">Game</a>
+    </nav>
+    <main id="main">
+      <h2>Instructions</h2>
+      <p>Tic-tac-toe (also known as noughts and crosses or Xs and Os) is a paper-and-pencil game for
+      two players, X and O, who take turns marking the spaces in a 3×3 grid.
+      The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal
+      row wins the game.</p>
+      <br>
+      <h2>Game</h2>
+   <!-- <p>Game Score: <label id="scoreLabel">0</label></p> -->
+   <div>
+   <table class="form-inputs">
+     <tr>
+       <td>
+         <form class="games" id="game-search">
+           <button type="submit" class="btn btn-default">Create New Game</button>
+         </form>
+       </td>
+       <td>
+         <form class="games" id="game-show-all">
+           <!-- <input type="text" name="cells[id]" placeholder="Enter Game ID" id="game-id"> -->
+           <button type="submit" class="btn btn-default">Get All Games</button>
+         </form>
+       </td>
+       <td class="input-button">
+         <form class="games" id="game-show">
+           <input type="text" name="cells[id]" placeholder="Enter Game ID" id="game-id">
+           <button type="submit" class="btn btn-default">Get one Game</button>
+         </form>
+       </td>
+     </tr>
+   </table>
+   </div>
+   <label class="message" id="lbl-message"></label>
+   <div id="game-board" class="board clearfix">
+   <table id="game-table">
+     <tr>
+       <td id="0"></td>
+       <td id="1"></td>
+       <td id="2"></td>
+     </tr>
+     <tr>
+       <td id="3"></td>
+       <td id="4"></td>
+       <td id="5"></td>
+     </tr>
+     <tr>
+       <td id="6"></td>
+       <td id="7"></td>
+       <td id="8"></td>
+     </tr>
+   </table>
+   </div>
+   <button id="reset">Reset</button>
+      <!-- <h2>About me</h2> -->
+      <!-- <p>My name is Ashok and I've been working as a developer for almost 3 years. Below is a link to my LinkedIn page</p>
+      <a href="https://www.linkedin.com/in/ashok-b-41b44b116/">Ashok's LinkedIn</a> -->
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
-    </body>
+    </main>
+    <footer class="clearfix">
+	     <p class="copyright">Copyright 2017</p>
+	     <p class="message">Created with &hearts; by <span class="name">GA</span></p>
+    </footer>
+
+<!-- <script src="js/main.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+$(document).ready(function(){
+  $("a").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      $('main').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+        window.location.hash = hash;
+      });
+    }
+  });
+});
+</script>
+</body>
 </html>

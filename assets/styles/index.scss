@@ -1,2 +1,185 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+.container-fluid {
+  background-color: #CC5F2C;
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+}
+
+header {
+  background-color: #F15B31;
+	color: #FFFFFF;
+	padding: 30px 20px;
+}
+
+nav {
+	background-color: #00A6B3;
+	/*color: #FFFFFF;*/
+	padding: 20px 0;
+
+  a {
+  	color: #FFFFFF;
+  }
+}
+
+main {
+	width: 850px;
+	margin: 35px auto;
+}
+
+footer {
+	text-transform: uppercase;
+	padding: 0 20px;
+	background-color: #0D2C40;
+	color: white;
+	font-size: 14px;
+	letter-spacing: .08em;
+	font-weight: 500;
+}
+
+h1 {
+	font-family: "Raleway", sans-serif;
+	text-transform: uppercase;
+	/*color: #0D2C40;*/
+	font-weight: 400;
+	letter-spacing: 1px;
+	font-size: 45px;
+	margin: 0;
+}
+
+a {
+	font-family: "Raleway", sans-serif;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #F15B31;
+	letter-spacing: 1px;
+	font-weight: 600;
+	font-size: 18px;
+	margin: 0 20px;
+	border-bottom: 2px solid transparent;
+}
+
+a:hover {
+	border-color: white;
+}
+
+h2 {
+	font-family: "Raleway", sans-serif;
+	text-transform: uppercase;
+	color: #0D2C40;
+	letter-spacing: 1px;
+	font-weight: 600;
+	font-size: 20px;
+}
+
+p {
+font-family: "Droid Serif", serif;
+line-height: 26px;
+font-size: 18px;
+}
+
+body {
+	text-align: center;
+	margin: 0;
+}
+
+img {
+	margin: 40px 8px 0 8px;
+}
+
+button {
+	font-family: "Droid Serif", serif;
+	text-align: center;
+	background-color: #00A6B3;
+	font-size: 18px;
+	color: #FFFFFF;
+	width: 150px;
+	height: 35px;
+	margin: 20px 0;
+	padding: 5px 0 20px 0;
+}
+
+table {
+  height: 200px;
+  margin-left: 325px;
+  width: 200px;
+
+  td {
+    border-style: solid;
+    height: 30px;
+    size: 1;
+    width: 50px;
+  }
+
+  tr {
+    width: 100px;
+  }
+}
+
+.form-inputs {
+  // margin-left: 20px;
+  height: 50px;
+  margin: 0 auto 50px;
+  text-align: center;
+  width: 100%;
+
+  table,
+  tr,
+  td {
+    border: 0;
+    border-collapse: collapse;
+  }
+
+  td {
+    width: 300px;
+  }
+}
+
+.input-button {
+  display: block;
+
+  input {
+    margin-bottom: 0;
+    width: 100px;
+  }
+}
+
+label {
+	font-family: "Droid Serif", serif;
+	text-align: center;
+	background-color: #F15B31;
+	font-size: 18px;
+	color: #FFFFFF;
+	width: 200px;
+	height: 35px;
+	padding: 5px 5px;
+}
+
+
+
+.copyright {
+	font-family: "Raleway", serif;
+	float: left;
+}
+
+
+.message {
+	font-family: "Raleway", serif;
+	float: right;
+}
+
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	content: " ";
+	clear: both;
+	height: 0;
+	font-size: 0;
+}
+.name {
+	color: #F15B31;
+	font-weight: 700;
+}
