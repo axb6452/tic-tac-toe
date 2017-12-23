@@ -15,10 +15,54 @@
       <header>
 	       <h1>Tic-tac-toe</h1>
       </header>
+      <div class="userLogin">
+        <h2>Login Screen</h2>
+        <form id="sign-in">
+        <fieldset>
+          <legend>Sign in!</legend>
+            <input type="text" name="credentials[email]" placeholder = "Enter Email">
+            <input type="password" name="credentials[password]" placeholder = "Enter Password">
+            <input type="submit" name="submit" value="Sign in!">
+        </fieldset>
+        <fieldset>
+          <label class="message" id="lblSignInMessage"></label>
+        </fieldset>
+      </form>
+      <form id="sign-up">
+        <fieldset>
+          <legend>Sign up!</legend>
+          <input type="text" name="credentials[email]" placeholder = "Enter Email">
+          <input type="password" name="credentials[password]" placeholder = "Enter Password">
+          <input type="password" name="credentials[password_confirmation]" placeholder = "Confirm Password">
+          <input type="submit" name="submit" value="Sign up!">
+        </fieldset>
+        <fieldset>
+          <label class="message" id="lblSignUpMessage"></label>
+        </fieldset>
+      </form>
+      <form>
+        <fieldset>
+          <label class="message" id="lblSignOutMessage"></label>
+        </fieldset>
+      </form>
+      </div>
+    <div class="gamePage" id="game-page">
     <nav>
       <a href="#main">Instructions</a>
-      <a href="#game-board">Game</a>
+      <a id="change-password-link" href="#">Change Password</a>
+      <a id="sign-out-link" href="#">Sign Out</a>
     </nav>
+    <form id="change-password">
+      <fieldset>
+        <legend>Change Password</legend>
+          <input type="password" name="passwords[old]" placeholder = "Enter Old Password">
+          <input type="password" name="passwords[new]" placeholder = "Enter New Password">
+          <input type="submit" name="submit" value="Change Password!">
+      </fieldset>
+      <fieldset>
+        <label class="message" id="lblChangePasswordMessage"></label>
+      </fieldset>
+    </form>
     <main id="main">
       <h2>Instructions</h2>
       <p>Tic-tac-toe (also known as noughts and crosses or Xs and Os) is a paper-and-pencil game for
@@ -72,18 +116,14 @@
    </table>
    </div>
    <button id="reset">Reset</button>
-      <!-- <h2>About me</h2> -->
-      <!-- <p>My name is Ashok and I've been working as a developer for almost 3 years. Below is a link to my LinkedIn page</p>
-      <a href="https://www.linkedin.com/in/ashok-b-41b44b116/">Ashok's LinkedIn</a> -->
-
     </main>
     <footer class="clearfix">
 	     <p class="copyright">Copyright 2017</p>
 	     <p class="message">Created with &hearts; by <span class="name">GA</span></p>
     </footer>
-
+</div>
 <!-- <script src="js/main.js"></script> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 $(document).ready(function(){
   $("a").on('click', function(event) {
     if (this.hash !== "") {
@@ -97,6 +137,6 @@ $(document).ready(function(){
     }
   });
 });
-</script>
+</script> -->
 </body>
 </html>

@@ -1,14 +1,14 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
-.container-fluid {
-
-}
-
 header {
   background-color: #F15B31;
   color: #FFFFFF;
   padding: 30px 20px;
+}
+
+.gamePage {
+  color: #000;
 }
 
 nav {
@@ -18,6 +18,7 @@ nav {
 
   a {
     color: #FFFFFF;
+    margin: 0 125px;
   }
 }
 
@@ -41,9 +42,9 @@ a {
   text-decoration: none;
   text-transform: uppercase;
 
-  .hover {
-    border-color: #FFFFFF;
-  }
+  // .hover {
+  //   border-color: #FFFFFF;
+  // }
 }
 
 main {
@@ -71,7 +72,7 @@ body {
   background-color: #F0650E;
   background-position: center;
   background-size: cover;
-  color: #fff;
+  // color: #fff;
   margin: 0;
   text-align: center;
 }
@@ -85,7 +86,7 @@ button {
 	text-align: center;
 	background-color: #00A6B3;
 	font-size: 18px;
-	color: #FFFFFF;
+	color: #000;
 	width: 150px;
 	height: 35px;
 	margin: 20px 0;
@@ -138,13 +139,11 @@ table {
 }
 
 label {
-	font-family: "Droid Serif", serif;
-	text-align: center;
-	// background-color: #F15B31;
-	font-size: 18px;
-	width: 200px;
-	height: 35px;
-	padding: 5px 5px;
+  font-family: 'Droid Serif', serif;
+  // background-color: #F15B31;
+  font-size: 18px;
+  height: 20px;
+  text-align: center;
 }
 
 .message {

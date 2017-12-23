@@ -1,8 +1,8 @@
 'use strict'
 
-// const puzzleApi = require('./api.js')
-// const puzzleUi = require('./ui.js')
-// const getFormFields = require('../../../lib/get-form-fields')
+const puzzleApi = require('./api.js')
+const puzzleUi = require('./ui.js')
+const getFormFields = require('../../../lib/get-form-fields')
 
 function checkResult (array) {
   if ((array[2] === array[4]) && (array[4] === array[6]) && array[2] !== '' && array[4] !== '' && array[6] !== '') {
@@ -82,6 +82,33 @@ const onInsertSymbol = function (event) {
   // clickedCell.Add('o')
 }
 
+const onChangePasswordLink = function (event) {
+  event.preventDefault()
+  console.log($('#change-password').css('display'))
+  if ($('#change-password').css('display') === 'none') {
+    $('#change-password').show()
+    $('#change-password-link').text('Hide').css('color', 'white')
+  } else {
+    $('#change-password').hide()
+    $('#lblChangePasswordMessage').hide()
+    $('#change-password-link').text('Change Password')
+  }
+}
+
+const onChangePassword = function (event) {
+  const data = getFormFields(this)
+  event.preventDefault()
+  puzzleApi.changePassword(data)
+    .then(puzzleUi.changePasswordSuccess)
+    .catch(puzzleUi.changePasswordFailure)
+}
+
+const addHandlers = function () {
+  $('#game-table').on('click', 'td', onInsertSymbol)
+  $('#change-password-link').on('click', onChangePasswordLink)
+  $('#change-password').on('submit', onChangePassword)
+}
+
 module.exports = {
-  onInsertSymbol
+  addHandlers
 }
