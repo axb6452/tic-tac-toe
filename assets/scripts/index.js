@@ -18,7 +18,7 @@ $(() => {
 // on document ready
 
 $(() => {
-  $('#game-page').hide()
+  $('#game-page').hide() // $('.userLogin').hide()
   gameEvents.addHandlers()
   gameAuth.addHandlers()
 })

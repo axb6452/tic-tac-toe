@@ -29,6 +29,7 @@ const signOutSuccess = function () {
   $('#game-page').hide()
   $('.userLogin').show()
   $('#lblSignOutMessage').text('User ' + store.user.email + ' successfully signedOut.').css({'color': 'green', 'background-color': 'white'})
+  $('#change-password-link').text('Change Password').css('color', 'white')
 }
 
 const signOutFailure = function (error) {

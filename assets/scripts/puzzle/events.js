@@ -42,41 +42,43 @@ function checkResult (array) {
   return false
 }
 
-let currentSymbol = 'o'
 const cells = new Array(9)
 cells.fill('')
 console.log(cells)
+
+let result = false
+let currentSymbol = 'o'
 const onInsertSymbol = function (event) {
   console.log($(event.target).text())
   console.log(currentSymbol)
-  if ($(event.target).text() === '') {
+  if (result === false && $(event.target).text() === '') {
     if (currentSymbol === 'o') {
       currentSymbol = 'x'
       event.target.append(currentSymbol)
       cells[parseInt(event.target.id)] = currentSymbol
-      const result = checkResult(cells)
+      result = checkResult(cells)
       console.log(cells)
       console.log(result)
       if (result) {
-        $('#lbl-message').text('X wins!').css({'color': 'green', 'background-color': 'white'})
+        $('#lbl-board-message').text('X wins!').css({'color': 'green', 'background-color': 'white'})
       } else {
-        $('#lbl-message').text("It's O's turn!").css({'color': '#F0650E', 'background-color': 'white'})
+        $('#lbl-board-message').text("It's O's turn!").css({'color': '#F0650E', 'background-color': 'white'})
       }
     } else {
       currentSymbol = 'o'
       event.target.append(currentSymbol)
       cells[parseInt(event.target.id)] = currentSymbol
-      const result = checkResult(cells)
+      result = checkResult(cells)
       console.log(cells)
       console.log(result)
       if (result) {
-        $('#lbl-message').text('O wins!').css({'color': 'green', 'background-color': 'white'})
+        $('#lbl-board-message').text('O wins!').css({'color': 'green', 'background-color': 'white'})
       } else {
-        $('#lbl-message').text("It's X's turn").css({'color': '#F0650E', 'background-color': 'white'})
+        $('#lbl-board-message').text("It's X's turn").css({'color': '#F0650E', 'background-color': 'white'})
       }
     }
   } else {
-    $('#lbl-message').text('Invalid click.').css({'color': 'red', 'background-color': 'white'})
+    $('#lbl-board-message').text('Invalid click.').css({'color': 'red', 'background-color': 'white'})
   }
   // const clickedCell = $(event.target).closest('td')
   // clickedCell.Add('o')
