@@ -2,8 +2,10 @@
 
 const puzzleApi = require('./api.js')
 const puzzleUi = require('./ui.js')
-const getFormFields = require('../../../lib/get-form-fields')
+const store = require('../store')
+// const getFormFields = require('../../../lib/get-form-fields')
 
+let countRows = 0
 function checkResult (array) {
   if ((array[2] === array[4]) && (array[4] === array[6]) && array[2] !== '' && array[4] !== '' && array[6] !== '') {
     console.log('You win')
@@ -24,14 +26,17 @@ function checkResult (array) {
     console.log('You win')
     return true
   } else {
-    let i = 0
     let tempArray = []
+    let i = 0
     while (i < array.length) {
       tempArray.push(array[i])
       if (tempArray.length === 3) {
         if ((tempArray[0] === tempArray[1]) && (tempArray[1] === tempArray[2]) && tempArray[0] !== '' && tempArray[1] !== '' && tempArray[2] !== '') {
           console.log('You win')
           return true
+        } else if (tempArray[0] !== '' && tempArray[1] !== '' && tempArray[2] !== '') {
+          countRows++
+          tempArray = []
         } else {
           tempArray = []
         }
@@ -42,8 +47,10 @@ function checkResult (array) {
   return false
 }
 
-const cells = new Array(9)
-cells.fill('')
+// const cells = new Array(9)
+// cells.fill('')
+const cells = store.cells
+console.log(cells)
 console.log(cells)
 
 let result = false
@@ -59,10 +66,16 @@ const onInsertSymbol = function (event) {
       result = checkResult(cells)
       console.log(cells)
       console.log(result)
+      console.log('countRows is ' + countRows)
       if (result) {
         $('#lbl-board-message').text('X wins!').css({'color': 'green', 'background-color': 'white'})
       } else {
-        $('#lbl-board-message').text("It's O's turn!").css({'color': '#F0650E', 'background-color': 'white'})
+        if (countRows === 3) {
+          $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#F0650E', 'background-color': 'white'})
+        } else {
+          countRows = 0
+          $('#lbl-board-message').text("It's O's turn!").css({'color': '#F0650E', 'background-color': 'white'})
+        }
       }
     } else {
       currentSymbol = 'o'
@@ -71,10 +84,16 @@ const onInsertSymbol = function (event) {
       result = checkResult(cells)
       console.log(cells)
       console.log(result)
+      console.log('countRows is ' + countRows)
       if (result) {
         $('#lbl-board-message').text('O wins!').css({'color': 'green', 'background-color': 'white'})
       } else {
-        $('#lbl-board-message').text("It's X's turn").css({'color': '#F0650E', 'background-color': 'white'})
+        if (countRows === 3) {
+          $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#F0650E', 'background-color': 'white'})
+        } else {
+          countRows = 0
+          $('#lbl-board-message').text("It's X's turn!").css({'color': '#F0650E', 'background-color': 'white'})
+        }
       }
     }
   } else {
@@ -84,31 +103,35 @@ const onInsertSymbol = function (event) {
   // clickedCell.Add('o')
 }
 
-const onChangePasswordLink = function (event) {
+const onGetAllGames = function (event) {
+  console.log(event.target)
   event.preventDefault()
-  console.log($('#change-password').css('display'))
-  if ($('#change-password').css('display') === 'none') {
-    $('#change-password').show()
-    $('#change-password-link').text('Hide').css('color', 'white')
-  } else {
-    $('#change-password').hide()
-    $('#lblChangePasswordMessage').hide()
-    $('#change-password-link').text('Change Password')
-  }
+  puzzleApi.getAllGames()
+    .then(puzzleUi.getAllGamesSuccess)
+    .catch(puzzleUi.getAllGamesFailure)
 }
 
-const onChangePassword = function (event) {
-  const data = getFormFields(this)
+const onCreateGame = function (event) {
+  console.log(event.target)
   event.preventDefault()
-  puzzleApi.changePassword(data)
-    .then(puzzleUi.changePasswordSuccess)
-    .catch(puzzleUi.changePasswordFailure)
+  puzzleApi.createGame()
+    .then(puzzleUi.createGameSuccess)
+    .catch(puzzleUi.createGameFailure)
+}
+
+const onGetSingleGame = function (event) {
+  console.log(event.target)
+  event.preventDefault()
+  puzzleApi.getSingleGame()
+    .then(puzzleUi.getSingleGameSuccess)
+    .catch(puzzleUi.getSingleGameFailure)
 }
 
 const addHandlers = function () {
   $('#game-table').on('click', 'td', onInsertSymbol)
-  $('#change-password-link').on('click', onChangePasswordLink)
-  $('#change-password').on('submit', onChangePassword)
+  $('#btn-create-game').on('click', onCreateGame)
+  $('#btn-get-game').on('click', onGetSingleGame)
+  $('#btn-search-incompletegames').on('click', onGetAllGames)
 }
 
 module.exports = {

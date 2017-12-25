@@ -97,25 +97,25 @@
      <tr>
        <td>
          <form class="games" id="game-search-complete">
-           <button type="submit" class="btn btn-default">Completed Games</button>
+           <button type="submit" id="btn-search-completegames" class="btn btn-default">Completed Games</button>
          </form>
        </td>
        <td>
          <form class="games" id="game-search-incomplete">
-           <button type="submit" class="btn btn-default">Incomplete Games</button>
+           <button type="submit" id="btn-search-incompletegames" class="btn btn-default">Incomplete Games</button>
          </form>
        </td>
        <td>
          <form class="games" id="game-create">
            <!-- <input type="text" name="cells[id]" placeholder="Enter Game ID" id="game-id"> -->
-           <button type="submit" class="btn btn-default">New Game</button>
+           <button type="submit" id="btn-create-game" class="btn btn-default">New Game</button>
          </form>
        </td>
        <td class="input-button">
          <form class="games" id="game-show">
            <div class="games-elements">
-             <input id="game-id" type="text" name="cells[id]" placeholder="Enter Game ID">
-             <button type="submit" class="btn btn-default">Get one Game</button>
+             <input id="game-id" type="text" placeholder="Enter Game ID">
+             <button type="submit" id="btn-get-game" class="btn btn-default">Get one Game</button>
            </div>
          </form>
        </td>
@@ -127,8 +127,8 @@
      <table id="game-results" class="results">
        <tr>
          <th>X Wins</th>
-         <th>O Wins</th>
          <th>Draws</th>
+         <th>O Wins</th>
       </tr>
       <tr>
         <td class="td0">0</td>
