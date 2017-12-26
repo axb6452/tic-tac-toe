@@ -75,12 +75,14 @@ const onInsertSymbol = function (event) {
         $('.td0').text((parseInt($('.td0').text()) + 1).toString())
         const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
         puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
+        countRows = 0
       } else {
         if (countRows === 3) {
           $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
           $('.td1').text((parseInt($('.td1').text()) + 1).toString())
           const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
           puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
+          countRows = 0
         } else {
           countRows = 0
           $('#lbl-board-message').text("It's O's turn!").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
@@ -101,12 +103,14 @@ const onInsertSymbol = function (event) {
         $('.td2').text((parseInt($('.td2').text()) + 1).toString())
         const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
         puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
+        countRows = 0
       } else {
         if (countRows === 3) {
           $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
           $('.td1').text((parseInt($('.td1').text()) + 1).toString())
           const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
           puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
+          countRows = 0
         } else {
           countRows = 0
           $('#lbl-board-message').text("It's X's turn!").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
