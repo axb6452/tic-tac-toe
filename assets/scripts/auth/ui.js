@@ -18,6 +18,8 @@ const signInSuccess = function (data) {
   $('.userLogin').hide()
   $('#game-page').show()
   $('#change-password').hide()
+  $('#game-table').hide()
+  $('#lbl-board-message').text('Select an option below to begin').css({'color': '#F0650E', 'background-color': 'white', 'width': '300px'})
 }
 
 const signInFailure = function (error) {

@@ -20,6 +20,6 @@ $(() => {
 $(() => {
   // $('.userLogin').hide()
   $('#game-page').hide()
-  gameEvents.addHandlers()
   gameAuth.addHandlers()
+  gameEvents.addHandlers()
 })

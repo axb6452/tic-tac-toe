@@ -14,9 +14,33 @@ const createGame = function () {
   })
 }
 
-const getAllGames = function () {
+const updateGame = function (data) {
+  console.log('user token is ' + store.user.token)
+  console.log('game id is: ' + store.game.id)
+  console.log('data for update is ' + data)
   return $.ajax({
-    url: config.apiOrigin + '/games',
+    url: config.apiOrigin + '/games/' + store.game.id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
+const getAllCompletedGames = function () {
+  return $.ajax({
+    url: config.apiOrigin + '/games?over=true',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const getAllIncompleteGames = function () {
+  return $.ajax({
+    url: config.apiOrigin + '/games?over=false',
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -37,6 +61,8 @@ const getSingleGame = function () {
 
 module.exports = {
   createGame,
+  updateGame,
   getSingleGame,
-  getAllGames
+  getAllCompletedGames,
+  getAllIncompleteGames
 }

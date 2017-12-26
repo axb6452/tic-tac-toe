@@ -173,11 +173,6 @@ label {
   text-align: center;
 }
 
-.boardmessage {
-  color: #F0650E;
-  width: 200px;
-}
-
 .copyright {
   float: left;
   font-family: 'Raleway', serif;
@@ -197,16 +192,18 @@ footer {
   text-transform: uppercase;
 }
 
-
-.clearfix:after {
-	visibility: hidden;
-	display: block;
-	content: " ";
-	clear: both;
-	height: 0;
-	font-size: 0;
+.clearfix {
+  .after {
+    clear: both;
+    content: ' ';
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
 }
+}
+
 .name {
-	color: #F15B31;
-	font-weight: 700;
+  color: #F15B31;
+  font-weight: 700;
 }

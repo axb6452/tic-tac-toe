@@ -6,12 +6,12 @@ const store = require('../store')
 // const getFormFields = require('../../../lib/get-form-fields')
 
 let countRows = 0
-function checkResult (array) {
+const checkResult = function (array) {
   if ((array[2] === array[4]) && (array[4] === array[6]) && array[2] !== '' && array[4] !== '' && array[6] !== '') {
     console.log('You win')
-    $('td[id=2]').css('textDecoration', 'line-through')
-    $('td[id=4]').css('textDecoration', 'line-through')
-    $('td[id=6]').css('textDecoration', 'line-through')
+    // $('td[id=2]').css('textDecoration', 'line-through')
+    // $('td[id=4]').css('textDecoration', 'line-through')
+    // $('td[id=6]').css('textDecoration', 'line-through')
     return true
   } else if ((array[0] === array[4]) && (array[4] === array[8]) && array[0] !== '' && array[4] !== '' && array[8] !== '') {
     console.log('You win')
@@ -47,68 +47,91 @@ function checkResult (array) {
   return false
 }
 
-// const cells = new Array(9)
-// cells.fill('')
-const cells = store.cells
-console.log(cells)
-console.log(cells)
+// let cells = new Array(9)
+// console.log('game object is ' + store.game)
+// if (store.game) {
+//   cells = store.game.cells
+// } else {
+//   cells.fill('')
+// }
+// console.log(cells)
+// let result = false
 
-let result = false
-let currentSymbol = 'o'
+store.currentSymbol = 'o'
 const onInsertSymbol = function (event) {
   console.log($(event.target).text())
-  console.log(currentSymbol)
-  if (result === false && $(event.target).text() === '') {
-    if (currentSymbol === 'o') {
-      currentSymbol = 'x'
-      event.target.append(currentSymbol)
-      cells[parseInt(event.target.id)] = currentSymbol
-      result = checkResult(cells)
-      console.log(cells)
-      console.log(result)
+  console.log(store.currentSymbol)
+  if (store.game.over === false && $(event.target).text() === '') {
+    if (store.currentSymbol === 'o') {
+      store.currentSymbol = 'x'
+      event.target.append(store.currentSymbol)
+      store.game.cells[parseInt(event.target.id)] = store.currentSymbol
+      store.game.over = checkResult(store.game.cells)
+      console.log(store.game.cells)
+      console.log('result is ' + store.game.over)
       console.log('countRows is ' + countRows)
-      if (result) {
-        $('#lbl-board-message').text('X wins!').css({'color': 'green', 'background-color': 'white'})
+      if (store.game.over) {
+        $('#lbl-board-message').text('X wins!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
+        const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
+        puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
       } else {
         if (countRows === 3) {
-          $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#F0650E', 'background-color': 'white'})
+          $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+          const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
+          puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
         } else {
           countRows = 0
-          $('#lbl-board-message').text("It's O's turn!").css({'color': '#F0650E', 'background-color': 'white'})
+          $('#lbl-board-message').text("It's O's turn!").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+          const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': false}}
+          puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
         }
       }
     } else {
-      currentSymbol = 'o'
-      event.target.append(currentSymbol)
-      cells[parseInt(event.target.id)] = currentSymbol
-      result = checkResult(cells)
-      console.log(cells)
-      console.log(result)
+      store.currentSymbol = 'o'
+      event.target.append(store.currentSymbol)
+      store.game.cells[parseInt(event.target.id)] = store.currentSymbol
+      store.game.over = checkResult(store.game.cells)
+      console.log(store.game.cells)
+      console.log('result is ' + store.game.over)
       console.log('countRows is ' + countRows)
-      if (result) {
-        $('#lbl-board-message').text('O wins!').css({'color': 'green', 'background-color': 'white'})
+      if (store.game.over) {
+        $('#lbl-board-message').text('O wins!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
+        const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
+        puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
       } else {
         if (countRows === 3) {
-          $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#F0650E', 'background-color': 'white'})
+          $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+          const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
+          puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
         } else {
           countRows = 0
-          $('#lbl-board-message').text("It's X's turn!").css({'color': '#F0650E', 'background-color': 'white'})
+          $('#lbl-board-message').text("It's X's turn!").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+          const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': false}}
+          puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
         }
       }
     }
   } else {
-    $('#lbl-board-message').text('Invalid click.').css({'color': 'red', 'background-color': 'white'})
+    $('#lbl-board-message').text('Invalid click.').css({'color': 'red', 'background-color': 'white', 'width': '200px'})
   }
   // const clickedCell = $(event.target).closest('td')
   // clickedCell.Add('o')
 }
 
-const onGetAllGames = function (event) {
+const onGetAllCompletedGames = function (event) {
   console.log(event.target)
   event.preventDefault()
-  puzzleApi.getAllGames()
-    .then(puzzleUi.getAllGamesSuccess)
-    .catch(puzzleUi.getAllGamesFailure)
+  puzzleApi.getAllCompletedGames()
+    .then(puzzleUi.getAllCompletedGamesSuccess)
+    .catch(puzzleUi.getAllCompletedGamesFailure)
+}
+
+const onGetAllIncompleteGames = function (event) {
+  console.log(event.target)
+  event.preventDefault()
+  puzzleApi.getAllIncompleteGames()
+    .then(puzzleUi.getAllIncompleteGamesSuccess)
+    .catch(puzzleUi.getAllIncompleteGamesFailure)
 }
 
 const onCreateGame = function (event) {
@@ -131,7 +154,8 @@ const addHandlers = function () {
   $('#game-table').on('click', 'td', onInsertSymbol)
   $('#btn-create-game').on('click', onCreateGame)
   $('#btn-get-game').on('click', onGetSingleGame)
-  $('#btn-search-incompletegames').on('click', onGetAllGames)
+  $('#btn-search-completegames').on('click', onGetAllCompletedGames)
+  $('#btn-search-incompletegames').on('click', onGetAllIncompleteGames)
 }
 
 module.exports = {
