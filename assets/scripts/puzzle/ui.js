@@ -61,9 +61,9 @@ const getSingleGameSuccess = function (data) {
   } else {
     if (blankCount !== 0) {
       if (xCount > oCount) {
-        $('#lbl-board-message').text('X Wins!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
+        $('#lbl-board-message').text('X won!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
       } else if (xCount === oCount) {
-        $('#lbl-board-message').text('O Wins!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
+        $('#lbl-board-message').text('O won!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
       }
     } else {
       const cells = store.game.cells
@@ -86,11 +86,11 @@ const getSingleGameSuccess = function (data) {
          ((cells[2] === cells[4]) && (cells[4] === cells[6]) && cells[2] === 'x')) {
         result = true
         console.log(result)
-        $('#lbl-board-message').text('X wins!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
+        $('#lbl-board-message').text('X won!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
       } else {
         result = false
         console.log(result)
-        $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+        $('#lbl-board-message').text('Ugh, it was a draw.').css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
       }
     }
   }

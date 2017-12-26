@@ -72,11 +72,13 @@ const onInsertSymbol = function (event) {
       console.log('countRows is ' + countRows)
       if (store.game.over) {
         $('#lbl-board-message').text('X wins!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
+        $('.td0').text((parseInt($('.td0').text()) + 1).toString())
         const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
         puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
       } else {
         if (countRows === 3) {
           $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+          $('.td1').text((parseInt($('.td1').text()) + 1).toString())
           const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
           puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
         } else {
@@ -96,11 +98,13 @@ const onInsertSymbol = function (event) {
       console.log('countRows is ' + countRows)
       if (store.game.over) {
         $('#lbl-board-message').text('O wins!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
+        $('.td2').text((parseInt($('.td2').text()) + 1).toString())
         const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
         puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
       } else {
         if (countRows === 3) {
           $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+          $('.td1').text((parseInt($('.td1').text()) + 1).toString())
           const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
           puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
         } else {
