@@ -26,11 +26,11 @@ const onChangePasswordLink = function (event) {
   console.log($('#change-password').css('display'))
   if ($('#change-password').css('display') === 'none') {
     $('#change-password').show()
-    $('#change-password-link').text('Hide').css('color', 'white')
+    $('#change-password-link').text('Hide').css('color', 'black')
   } else {
     $('#change-password').hide()
     $('#lblChangePasswordMessage').hide()
-    $('#change-password-link').text('Change Password')
+    $('#change-password-link').text('Change Password').css('color', 'black')
   }
 }
 
@@ -52,7 +52,6 @@ const onSignOut = function (event) {
 const addHandlers = function () {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
-  // $('#change-password-link').on('submit', $('#change-password').show())
   $('#change-password-link').on('click', onChangePasswordLink)
   $('#change-password').on('submit', onChangePassword)
   $('#sign-out-link').on('click', onSignOut)

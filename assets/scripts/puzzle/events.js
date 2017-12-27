@@ -60,6 +60,8 @@ const checkResult = function (array) {
 store.currentSymbol = 'o'
 const onInsertSymbol = function (event) {
   console.log($(event.target).text())
+  console.log('td position top is ' + $(event.target).position().top)
+  console.log('td position left is ' + $(event.target).position().left)
   console.log(store.currentSymbol)
   if (store.game.over === false && $(event.target).text() === '') {
     if (store.currentSymbol === 'o') {
@@ -78,14 +80,14 @@ const onInsertSymbol = function (event) {
         countRows = 0
       } else {
         if (countRows === 3) {
-          $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+          $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
           $('.td1').text((parseInt($('.td1').text()) + 1).toString())
           const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
           puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
           countRows = 0
         } else {
           countRows = 0
-          $('#lbl-board-message').text("It's O's turn!").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+          $('#lbl-board-message').text("It's O's turn!").css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
           const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': false}}
           puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
         }
@@ -106,14 +108,14 @@ const onInsertSymbol = function (event) {
         countRows = 0
       } else {
         if (countRows === 3) {
-          $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+          $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
           $('.td1').text((parseInt($('.td1').text()) + 1).toString())
           const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
           puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
           countRows = 0
         } else {
           countRows = 0
-          $('#lbl-board-message').text("It's X's turn!").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+          $('#lbl-board-message').text("It's X's turn!").css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
           const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': false}}
           puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
         }
@@ -158,14 +160,50 @@ const onGetSingleGame = function (event) {
     .catch(puzzleUi.getSingleGameFailure)
 }
 
+const onBeforeUnload = function (event) {
+  // debugger
+  localStorage.setItem('totalXWins', $('.td0').text())
+  localStorage.setItem('totalDraws', $('.td1').text())
+  localStorage.setItem('totalOWins', $('.td2').text())
+}
+
+const onLoad = function (event) {
+  // debugger
+  const xWins = localStorage.getItem('totalXWins')
+  console.log(xWins)
+  const draws = localStorage.getItem('totalDraws')
+  console.log(draws)
+  const oWins = localStorage.getItem('totalOWins')
+  console.log(oWins)
+
+  $('.td0').text(xWins)
+  $('.td1').text(draws)
+  $('.td2').text(oWins)
+}
+
+const doNavigation = function (event) {
+  if (this.hash !== '') {
+    event.preventDefault()
+    const hash = this.hash
+    $('main').animate({
+      scrollTop: $(hash).offset().top
+    }, 200, function () {
+      window.location.hash = hash
+    })
+  }
+}
+
 const addHandlers = function () {
   $('#game-table').on('click', 'td', onInsertSymbol)
   $('#btn-create-game').on('click', onCreateGame)
   $('#btn-get-game').on('click', onGetSingleGame)
   $('#btn-search-completegames').on('click', onGetAllCompletedGames)
   $('#btn-search-incompletegames').on('click', onGetAllIncompleteGames)
+  $(window).on('beforeunload', onBeforeUnload)
+  $('a').on('click', doNavigation)
 }
 
 module.exports = {
-  addHandlers
+  addHandlers,
+  onLoad
 }

@@ -9,22 +9,24 @@ const signUpSuccess = function (data) {
 
 const signUpFailure = function (error) {
   console.error(error)
-  $('#lblSignUpMessage').text(error).css({'color': 'red', 'background-color': 'white'})
+  $('#lblSignUpMessage').text('Error during sign up').css({'color': 'red', 'background-color': 'white'})
 }
 
 const signInSuccess = function (data) {
   console.log(data)
   store.user = data.user
-  $('.userLogin').hide()
+  $('.userlogin').hide()
   $('#game-page').show()
   $('#change-password').hide()
   $('#game-table').hide()
-  $('#lbl-board-message').text('Select an option below to begin').css({'color': '#F0650E', 'background-color': 'white', 'width': '300px'})
+  // $('#game-table td').empty()
+  // $('#game-table td').hover(function () { $(this).css('background-color', '#0F2043') }, function () { $(this).css('background-color', '#0F2043') })
+  $('#lbl-board-message').text('Select an option below to begin').css({'color': '#0F2043', 'background-color': 'white', 'width': '300px'})
 }
 
 const signInFailure = function (error) {
   console.error(error)
-  $('#lblSignInMessage').text(error).css({'color': 'red', 'background-color': 'white'})
+  $('#lblSignInMessage').text('Error during sign in').css({'color': 'red', 'background-color': 'white'})
 }
 
 const changePasswordSuccess = function () {
@@ -44,14 +46,14 @@ const changePasswordFailure = function (error) {
 
 const signOutSuccess = function () {
   $('#game-page').hide()
-  $('.userLogin').show()
+  $('.userlogin').show()
   $('#lblSignOutMessage').text('User ' + store.user.email + ' successfully signedOut.').css({'color': 'green', 'background-color': 'white'})
-  $('#change-password-link').text('Change Password').css('color', 'white')
+  $('#change-password-link').text('Change Password').css('color', 'black')
 }
 
 const signOutFailure = function (error) {
   console.error(error)
-  $('#lblSignOutMessage').text(error).css({'color': 'red', 'background-color': 'white'})
+  $('#lblSignOutMessage').text('Error during sign out').css({'color': 'red', 'background-color': 'white'})
 }
 
 module.exports = {

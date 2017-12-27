@@ -11,8 +11,10 @@ const createGameSuccess = function (data) {
   for (let i = 0; i < store.game.cells.length; i++) {
     $('#' + i).text(store.game.cells[i])
   }
-  $('#lbl-board-message').text('X starts').css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+  $('#lbl-board-message').text('X starts').css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
   $('#game-table').show()
+  // $('#game-table').attr('disabled', 'enabled')
+  $('#game-table td').hover(function () { $(this).css({'background-color': '#79CEDC', 'color': 'black'}) }, function () { $(this).css({'background-color': '#0F2043', 'color': 'white'}) })
 }
 
 const createGameFailure = function () {
@@ -50,13 +52,13 @@ const getSingleGameSuccess = function (data) {
   if (store.game.over === false) {
     if (xCount > oCount && xCount !== 0) {
       store.currentSymbol = 'x'
-      $('#lbl-board-message').text("It's O's turn!").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+      $('#lbl-board-message').text("It's O's turn!").css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
     } else if (xCount === oCount && xCount !== 0) {
       store.currentSymbol = 'o'
-      $('#lbl-board-message').text("It's X's turn!").css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+      $('#lbl-board-message').text("It's X's turn!").css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
     } else {
       store.currentSymbol = 'o'
-      $('#lbl-board-message').text('X starts').css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+      $('#lbl-board-message').text('X starts').css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
     }
   } else {
     if (blankCount !== 0) {
@@ -90,11 +92,12 @@ const getSingleGameSuccess = function (data) {
       } else {
         result = false
         console.log(result)
-        $('#lbl-board-message').text('Ugh, it was a draw.').css({'color': '#F0650E', 'background-color': 'white', 'width': '200px'})
+        $('#lbl-board-message').text('Ugh, it was a draw.').css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
       }
     }
   }
   $('#game-table').show()
+  $('#game-table td').hover(function () { $(this).css({'background-color': '#79CEDC', 'color': 'black'}) }, function () { $(this).css({'background-color': '#0F2043', 'color': 'white'}) })
 }
 
 const getSingleGameFailure = function () {
@@ -104,7 +107,7 @@ const getSingleGameFailure = function () {
 const getAllCompletedGamesSuccess = function (data) {
   console.log('data: ', data)
   $('#game-table').hide()
-  $('#lbl-board-message').text('Check console for a list of completed games. Enter game id to view result').css({'color': '#F0650E', 'background-color': 'white', 'width': '560px'})
+  $('#lbl-board-message').text('Check console for a list of completed games. Enter game id to view result').css({'color': '#0F2043', 'background-color': 'white', 'width': '560px'})
 }
 
 const getAllCompletedGamesFailure = function (data) {
@@ -114,7 +117,7 @@ const getAllCompletedGamesFailure = function (data) {
 const getAllIncompleteGamesSuccess = function (data) {
   console.log('data: ', data)
   $('#game-table').hide()
-  $('#lbl-board-message').text('Check console for a list of incomplete games. Enter game id to resume game').css({'color': '#F0650E', 'background-color': 'white', 'width': '600px'})
+  $('#lbl-board-message').text('Check console for a list of incomplete games. Enter game id to resume game').css({'color': '#0F2043', 'background-color': 'white', 'width': '600px'})
 }
 
 const getAllIncompleteGamesFailure = function (data) {
