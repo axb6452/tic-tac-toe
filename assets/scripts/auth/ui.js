@@ -49,6 +49,8 @@ const signOutSuccess = function () {
   $('.userlogin').show()
   $('#lblSignOutMessage').text('User ' + store.user.email + ' successfully signedOut.').css({'color': 'green', 'background-color': 'white'})
   $('#change-password-link').text('Change Password').css('color', 'black')
+  $('#lblSignInMessage').text('')
+  $('#lblSignUpMessage').text('')
 }
 
 const signOutFailure = function (error) {
