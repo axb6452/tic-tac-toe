@@ -161,27 +161,34 @@ const onGetSingleGame = function (event) {
 }
 
 const onBeforeUnload = function (event) {
-  // debugger
+  console.log('type of outgoing is ' + typeof ($('.td0').text()))
+  console.log('type of outgoing is ' + typeof ($('.td1').text()))
+  console.log('type of outgoing is ' + typeof ($('.td2').text()))
   localStorage.setItem('totalXWins', $('.td0').text())
+  console.log($('.td0').text())
   localStorage.setItem('totalDraws', $('.td1').text())
+  console.log($('.td1').text())
   localStorage.setItem('totalOWins', $('.td2').text())
+  console.log($('.td2').text())
 }
 
 const onLoad = function (event) {
-  // debugger
-  const xWins = (localStorage.getItem('totalXWins') === (null || undefined || 'NaN' || '')) ? 0 : localStorage.getItem('totalXWins')
+  const xWins = typeof (parseInt(localStorage.getItem('totalXWins'))) !== 'number' ? '0' : localStorage.getItem('totalXWins')
   console.log('get item result ' + localStorage.getItem('totalXWins'))
   console.log('xWins: ' + xWins)
-  const draws = (localStorage.getItem('totalDraws') === (null || undefined || 'NaN' || '')) ? 0 : localStorage.getItem('totalDraws')
+  console.log('type of is ' + typeof (xWins))
+  const draws = typeof (parseInt(localStorage.getItem('totalDraws'))) !== 'number' ? '0' : localStorage.getItem('totalDraws')
   console.log('get item result ' + localStorage.getItem('totalDraws'))
   console.log('Draws: ' + draws)
-  const oWins = (localStorage.getItem('totalOWins') === (null || undefined || 'NaN' || '')) ? 0 : localStorage.getItem('totalOWins')
+  console.log('type of is ' + typeof (draws))
+  const oWins = typeof (parseInt(localStorage.getItem('totalOWins'))) !== 'number' ? '0' : localStorage.getItem('totalOWins')
   console.log('get item result ' + localStorage.getItem('totalOWins'))
   console.log('oWins: ' + oWins)
+  console.log('type of is ' + typeof (oWins))
 
-  $('.td0').text(xWins)
-  $('.td1').text(draws)
-  $('.td2').text(oWins)
+  $('.td0').append(xWins)
+  $('.td1').append(draws)
+  $('.td2').append(oWins)
 }
 
 const doNavigation = function (event) {
