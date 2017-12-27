@@ -204,12 +204,12 @@ img {
     border-color: #D5A458;
     text-align: center;
   }
+}
 
-  .td0,
-  .td1 {
-    border-color: #D5A458;
-    border-right: solid;
-  }
+.td0,
+.td1 {
+  border-right: solid;
+  border-color: #D5A458;
 }
 
 label {
@@ -362,7 +362,6 @@ footer {
 
   footer {
     margin-bottom: 500px;
-
 
     p {
       font-size: 10px;
