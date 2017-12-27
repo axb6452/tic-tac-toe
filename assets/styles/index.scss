@@ -95,6 +95,7 @@ body {
   background-position: center;
   background-size: cover;
   // color: #fff;
+  font-family: 'Times New Roman', sans-serif;
   margin: 0;
   text-align: center;
 }
@@ -108,7 +109,7 @@ img {
   border: solid;
   border-color: #D5A458;
   color: #fff;
-  font-family: 'Raleway', serif;
+  font-family: 'Times New Roman', sans-serif;
   height: 25px;
   padding: 1px 0 20px;
   text-align: center;
@@ -193,7 +194,7 @@ img {
 
 .results {
   color: #fff;
-  font-family: 'Raleway', serif;
+  font-family: 'Times New Roman', sans-serif;
   font-size: 18px;
   margin: 0 auto;
   width: 500px;
@@ -216,7 +217,7 @@ label {
   border: solid;
   border-color: #D5A458;
   border-width: .5px;
-  font-family: 'Raleway', serif;
+  font-family: 'Times New Roman', sans-serif;
   font-size: 18px;
   text-align: center;
 }
@@ -235,12 +236,12 @@ footer {
 
 .copyright {
   float: left;
-  font-family: 'Raleway', serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 .footermessage {
   float: right;
-  font-family: 'Raleway', serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 .name {
@@ -249,6 +250,11 @@ footer {
 }
 
 @media (max-width: 500px) {
+
+  header {
+    background-size: 500px 600px;
+  }
+
   h1 {
     font-size: 20px;
     margin: 0;
@@ -259,46 +265,107 @@ footer {
   }
 
   nav {
-    height: 20px;
-    margin-bottom: 50px;
+    display: block;
+    height: 120px;
+    text-align: center;
   }
+
+  .descriptionlink,
+  .gamelink,
+  .scoreboardlink,
+  .changepasswordlink {
+    margin: 0 auto;
+  }
+
+  .signoutlink {
+    margin-right: 150px;
+  }
+
 
   a {
     display: block;
     font-size: 13px;
-    padding: 5px;
+    padding: 1px;
     text-align: center;
   }
 
   main {
-    margin-top: 100px;
-    width: 400px;
+    width: 350px;
   }
 
-  div {
-    height: 175px;
-    margin: 0 12px;
+  h2 {
+    font-size: 15px;
+    margin: 0;
   }
 
   body {
     font-size: 13px;
-    width: 500px;
+    height: 1000px;
   }
 
-  button {
-    display: block;
+  label {
     font-size: 13px;
-    margin: 0;
-    width: 50px;
   }
 
-  h2 {
-    font-size: 16px;
-    margin: 0;
-  }
-
-  p {
+  em {
     font-size: 13px;
-    // line-height: 24px;
+  }
+
+  legend {
+    font-size: 15px;
+  }
+
+  input {
+    font-size: 13px;
+    width: 92px;
+  }
+
+  .forminputs {
+    height: 250px;
+  }
+
+  .form-inputs {
+    tr {
+      display: block;
+      margin-bottom: 0;
+      margin-left: 15px;
+      margin-top: 25px;
+    }
+
+    td {
+      display: block;
+      margin: 10px;
+    }
+
+    .games {
+      button {
+        font-size: 12px;
+        width: 150px;
+      }
+
+      .games-elements {
+        margin-left: 40px;
+
+        input {
+          font-size: 9px;
+          width: 65px;
+      }
+    }
+  }
+}
+
+  .results {
+    font-size: 13px;
+    margin-top: 10px;
+    width: 300px;
+}
+
+  footer {
+    margin-bottom: 500px;
+
+
+    p {
+      font-size: 10px;
+    }
   }
 }
