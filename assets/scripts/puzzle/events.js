@@ -169,13 +169,13 @@ const onBeforeUnload = function (event) {
 
 const onLoad = function (event) {
   // debugger
-  const xWins = (localStorage.getItem('totalXWins') === (null || undefined || 'NaN')) ? 0 : localStorage.getItem('totalXWins')
+  const xWins = (localStorage.getItem('totalXWins') === (null || undefined || 'NaN' || '')) ? 0 : localStorage.getItem('totalXWins')
   console.log('get item result ' + localStorage.getItem('totalXWins'))
   console.log('xWins: ' + xWins)
-  const draws = (localStorage.getItem('totalDraws') === (null || undefined || 'NaN')) ? 0 : localStorage.getItem('totalDraws')
+  const draws = (localStorage.getItem('totalDraws') === (null || undefined || 'NaN' || '')) ? 0 : localStorage.getItem('totalDraws')
   console.log('get item result ' + localStorage.getItem('totalDraws'))
   console.log('Draws: ' + draws)
-  const oWins = (localStorage.getItem('totalOWins') === (null || undefined || 'NaN')) ? 0 : localStorage.getItem('totalOWins')
+  const oWins = (localStorage.getItem('totalOWins') === (null || undefined || 'NaN' || '')) ? 0 : localStorage.getItem('totalOWins')
   console.log('get item result ' + localStorage.getItem('totalOWins'))
   console.log('oWins: ' + oWins)
 
