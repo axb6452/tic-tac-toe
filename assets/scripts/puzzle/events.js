@@ -173,15 +173,18 @@ const onBeforeUnload = function (event) {
 }
 
 const onLoad = function (event) {
-  const xWins = typeof (parseInt(localStorage.getItem('totalXWins'))) !== 'number' ? 0 : localStorage.getItem('totalXWins')
+  console.log(localStorage.getItem('totalXWins'))
+  const xWins = localStorage.getItem('totalXWins') === (undefined || null || '') ? '0' : localStorage.getItem('totalXWins')
   console.log('get item result ' + localStorage.getItem('totalXWins'))
   console.log('xWins: ' + xWins)
   console.log('type of is ' + typeof (xWins))
-  const draws = typeof (parseInt(localStorage.getItem('totalDraws'))) !== 'number' ? 0 : localStorage.getItem('totalDraws')
+  console.log(localStorage.getItem('totalDraws'))
+  const draws = localStorage.getItem('totalDraws') === (undefined || null || '') ? '0' : localStorage.getItem('totalDraws')
   console.log('get item result ' + localStorage.getItem('totalDraws'))
   console.log('Draws: ' + draws)
   console.log('type of is ' + typeof (draws))
-  const oWins = typeof (parseInt(localStorage.getItem('totalOWins'))) !== 'number' ? 0 : localStorage.getItem('totalOWins')
+  console.log(localStorage.getItem('totalOWins'))
+  const oWins = localStorage.getItem('totalOWins') === (undefined || null || '') ? '0' : localStorage.getItem('totalOWins')
   console.log('get item result ' + localStorage.getItem('totalOWins'))
   console.log('oWins: ' + oWins)
   console.log('type of is ' + typeof (oWins))
