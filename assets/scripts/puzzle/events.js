@@ -161,40 +161,19 @@ const onGetSingleGame = function (event) {
 }
 
 const onBeforeUnload = function (event) {
-  console.log('type of outgoing is ' + typeof ($('.td0').text()))
-  console.log('type of outgoing is ' + typeof ($('.td1').text()))
-  console.log('type of outgoing is ' + typeof ($('.td2').text()))
   localStorage.setItem('totalXWins', $('.td0').text())
-  console.log($('.td0').text())
   localStorage.setItem('totalDraws', $('.td1').text())
-  console.log($('.td1').text())
   localStorage.setItem('totalOWins', $('.td2').text())
-  console.log($('.td2').text())
 }
 
 const onLoad = function (event) {
-  console.log(localStorage.getItem('totalXWins'))
-  const xWins = localStorage.getItem('totalXWins') === (undefined || null || '') ? '0' : localStorage.getItem('totalXWins')
-  console.log('get item result ' + localStorage.getItem('totalXWins'))
-  console.log('xWins: ' + xWins)
-  console.log('type of is ' + typeof (xWins))
-  console.log(localStorage.getItem('totalDraws'))
-  const draws = localStorage.getItem('totalDraws') === (undefined || null || '') ? '0' : localStorage.getItem('totalDraws')
-  console.log('get item result ' + localStorage.getItem('totalDraws'))
-  console.log('Draws: ' + draws)
-  console.log('type of is ' + typeof (draws))
-  console.log(localStorage.getItem('totalOWins'))
-  const oWins = localStorage.getItem('totalOWins') === (undefined || null || '') ? '0' : localStorage.getItem('totalOWins')
-  console.log('get item result ' + localStorage.getItem('totalOWins'))
-  console.log('oWins: ' + oWins)
-  console.log('type of is ' + typeof (oWins))
+  const xWins = localStorage.getItem('totalXWins') === (undefined || null || '' || 'NaN') ? '0' : localStorage.getItem('totalXWins')
+  const draws = localStorage.getItem('totalDraws') === (undefined || null || '' || 'NaN') ? '0' : localStorage.getItem('totalDraws')
+  const oWins = localStorage.getItem('totalOWins') === (undefined || null || '' || 'NaN') ? '0' : localStorage.getItem('totalOWins')
 
   $('.td0').text(xWins)
-  console.log($('.td0').text())
   $('.td1').text(draws)
-  console.log($('.td1').text())
   $('.td2').text(oWins)
-  console.log($('.td2').text())
 }
 
 const doNavigation = function (event) {
