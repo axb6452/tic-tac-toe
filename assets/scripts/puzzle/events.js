@@ -74,14 +74,14 @@ const onInsertSymbol = function (event) {
       console.log('countRows is ' + countRows)
       if (store.game.over) {
         $('#lbl-board-message').text('X wins!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
-        $('.td0').html((parseInt($('.td0').html()) + 1))
+        $('.td0').text((parseInt($('.td0').text()) + 1))
         const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
         puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
         countRows = 0
       } else {
         if (countRows === 3) {
           $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
-          $('.td1').html((parseInt($('.td1').html()) + 1))
+          $('.td1').text((parseInt($('.td1').text()) + 1))
           const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
           puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
           countRows = 0
@@ -102,14 +102,14 @@ const onInsertSymbol = function (event) {
       console.log('countRows is ' + countRows)
       if (store.game.over) {
         $('#lbl-board-message').text('O wins!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
-        $('.td2').html((parseInt($('.td2').html()) + 1))
+        $('.td2').text((parseInt($('.td2').text()) + 1))
         const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
         puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
         countRows = 0
       } else {
         if (countRows === 3) {
           $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
-          $('.td1').html((parseInt($('.td1').html()) + 1))
+          $('.td1').text((parseInt($('.td1').text()) + 1))
           const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
           puzzleApi.updateGame(updateGameData).then(puzzleUi.updateGameSuccess).catch(puzzleUi.updateGameFailure)
           countRows = 0
@@ -161,15 +161,15 @@ const onGetSingleGame = function (event) {
 }
 
 const onBeforeUnload = function (event) {
-  console.log('type of outgoing is ' + typeof ($('.td0').html()))
-  console.log('type of outgoing is ' + typeof ($('.td1').html()))
-  console.log('type of outgoing is ' + typeof ($('.td2').html()))
-  localStorage.setItem('totalXWins', $('.td0').html())
-  console.log($('.td0').html())
-  localStorage.setItem('totalDraws', $('.td1').html())
-  console.log($('.td1').html())
-  localStorage.setItem('totalOWins', $('.td2').html())
-  console.log($('.td2').html())
+  console.log('type of outgoing is ' + typeof ($('.td0').text()))
+  console.log('type of outgoing is ' + typeof ($('.td1').text()))
+  console.log('type of outgoing is ' + typeof ($('.td2').text()))
+  localStorage.setItem('totalXWins', $('.td0').text())
+  console.log($('.td0').text())
+  localStorage.setItem('totalDraws', $('.td1').text())
+  console.log($('.td1').text())
+  localStorage.setItem('totalOWins', $('.td2').text())
+  console.log($('.td2').text())
 }
 
 const onLoad = function (event) {
@@ -186,12 +186,12 @@ const onLoad = function (event) {
   console.log('oWins: ' + oWins)
   console.log('type of is ' + typeof (oWins))
 
-  $('.td0').html(xWins)
-  console.log($('.td0').html())
-  $('.td1').html(draws)
-  console.log($('.td1').html())
-  $('.td2').html(oWins)
-  console.log($('.td2').html())
+  $('.td0').text(xWins)
+  console.log($('.td0').text())
+  $('.td1').text(draws)
+  console.log($('.td1').text())
+  $('.td2').text(oWins)
+  console.log($('.td2').text())
 }
 
 const doNavigation = function (event) {

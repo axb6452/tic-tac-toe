@@ -193,7 +193,6 @@ img {
 }
 
 .results {
-  border-color: #D5A458;
   color: #fff;
   font-family: 'Times New Roman', sans-serif;
   font-size: 18px;
@@ -206,11 +205,20 @@ img {
     text-align: center;
   }
 
-  .td0,
-  .td1 {
+  td {
+    border: solid;
+    border-bottom: 0;
     border-color: #D5A458;
-    border-right: solid;
   }
+
+  .td0 {
+    border-left: 0;
+  }
+
+  .td2 {
+    border-right: 0;
+  }
+
 }
 
 label {
