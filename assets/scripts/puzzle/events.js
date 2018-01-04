@@ -3,6 +3,7 @@
 const puzzleApi = require('./api.js')
 const puzzleUi = require('./ui.js')
 const store = require('../store')
+// const config = require('../config')
 // const getFormFields = require('../../../lib/get-form-fields')
 
 let countRows = 0
@@ -56,7 +57,6 @@ const checkResult = function (array) {
 // }
 // console.log(cells)
 // let result = false
-
 store.currentSymbol = 'o'
 const onInsertSymbol = function (event) {
   console.log($(event.target).text())
@@ -128,6 +128,15 @@ const onInsertSymbol = function (event) {
   // clickedCell.Add('o')
 }
 
+const onJoinAsO = function (event) {
+  console.log(event.target)
+  event.preventDefault()
+  const data = '{}'
+  puzzleApi.joinAsO(data)
+    .then(puzzleUi.joinAsOSuccess)
+    .catch(puzzleUi.joinAsOFailure)
+}
+
 const onGetAllCompletedGames = function (event) {
   console.log(event.target)
   event.preventDefault()
@@ -152,10 +161,24 @@ const onCreateGame = function (event) {
     .catch(puzzleUi.createGameFailure)
 }
 
-const onGetSingleGame = function (event) {
+const onGetSingleCompletedGame = function (event) {
   console.log(event.target)
   event.preventDefault()
-  puzzleApi.getSingleGame()
+  $('#myModal').modal('toggle')
+  const gameId = $('#txt-get-completed-game').val()
+  console.log('game id is ' + gameId)
+  puzzleApi.getSingleGame(gameId)
+    .then(puzzleUi.getSingleGameSuccess)
+    .catch(puzzleUi.getSingleGameFailure)
+}
+
+const onGetSingleIncompleteGame = function (event) {
+  console.log(event.target)
+  event.preventDefault()
+  $('#myModal2').modal('toggle')
+  const gameId = $('#txt-get-incomplete-game').val()
+  console.log('game id is ' + gameId)
+  puzzleApi.getSingleGame(gameId)
     .then(puzzleUi.getSingleGameSuccess)
     .catch(puzzleUi.getSingleGameFailure)
 }
@@ -180,9 +203,9 @@ const doNavigation = function (event) {
   if (this.hash !== '') {
     event.preventDefault()
     const hash = this.hash
-    $('main').animate({
+    $('html').animate({
       scrollTop: $(hash).offset().top
-    }, 200, function () {
+    }, 700, function () {
       window.location.hash = hash
     })
   }
@@ -191,11 +214,13 @@ const doNavigation = function (event) {
 const addHandlers = function () {
   $('#game-table').on('click', 'td', onInsertSymbol)
   $('#btn-create-game').on('click', onCreateGame)
-  $('#btn-get-game').on('click', onGetSingleGame)
+  $('#btn-get-completed-game').on('click', onGetSingleCompletedGame)
+  $('#btn-get-incomplete-game').on('click', onGetSingleIncompleteGame)
   $('#btn-search-completegames').on('click', onGetAllCompletedGames)
   $('#btn-search-incompletegames').on('click', onGetAllIncompleteGames)
   $(window).on('beforeunload', onBeforeUnload)
   $('a').on('click', doNavigation)
+  $('#btn-enterasO').on('click', onJoinAsO)
 }
 
 module.exports = {
