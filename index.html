@@ -74,7 +74,7 @@
       row wins the game.<br><br>
       When considering only the state of the board, and after taking into account board symmetries (i.e. rotations and reflections),
       there are only 138 terminal board positions. Assuming that X makes the first move every time:
-      <span>91 distinct positions are won by (X), 44 distinct positions are won by (O), 3 distinct positions are drawn (also known as a cat's game)</span><br><br>
+      <span>91 distinct positions are won by (X), 44 distinct positions are won by (O), 3 distinct positions are drawn (also known as a cat's game).</span><br><br>
       Games played on three-in-a-row boards can be traced back to ancient Egypt, where such game boards have been found on roofing tiles dating from around 1300 BCE.
       An early variation of tic-tac-toe was played in the Roman Empire, around the first century BC. It was called terni lapilli (three pebbles at a time) and instead
       of having any number of pieces, each player only had three, thus they had to move them around to empty spaces to keep playing.[7] The game's grid markings have
@@ -85,6 +85,7 @@
       <h2>Game</h2>
    <!-- <p>Game Score: <label id="scoreLabel">0</label></p> -->
   <label class="boardmessage" id="lbl-board-message">X starts</label>
+  <br>
    <div id="game-board" class="board clearfix">
    <table id="game-table" class="game-table">
      <tr>
@@ -104,6 +105,7 @@
      </tr>
    </table>
    </div>
+   <br>
    <div class="forminputs">
    <table class="form-inputs">
      <tr>
@@ -167,19 +169,20 @@
            <button type="submit" id="btn-create-game" class="btn btn-default">New Game</button>
          </form>
        </td>
-       <td class="input-button">
-         <form class="games" id="game-show">
+       <!-- <td class="input-button"> -->
+         <!-- <form class="games" id="game-show">
              <div class="oinputs">
                <input id="game-id-o" type="text" placeholder="Enter Game ID">
                <button type="submit" id="btn-enterasO" class="btn btn-default">Enter Game As O</button>
-             </div>
+             </div> -->
              <!-- <input id="game-id" type="text" placeholder="Enter Game ID">
              <button type="submit" id="btn-get-game" class="btn btn-default">Get Game</button> -->
-         </form>
-       </td>
+         <!-- </form> -->
+       <!-- </td> -->
      </tr>
    </table>
    </div>
+   <br>
    </div>
    <!-- <button id="reset">Reset</button> -->
    <div class="section">

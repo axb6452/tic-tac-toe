@@ -6,7 +6,6 @@ const ui = require('./ui')
 
 const onSignUp = function (event) {
   const data = getFormFields(this)
-  console.log('Form fields data is ' + data)
   event.preventDefault()
   api.signUp(data)
     .then(ui.signUpSuccess)
@@ -23,7 +22,6 @@ const onSignIn = function (event) {
 
 const onChangePasswordLink = function (event) {
   event.preventDefault()
-  console.log($('#change-password').css('display'))
   if ($('#change-password').css('display') === 'none') {
     $('#change-password').show()
     $('#change-password-link').text('Hide').css('color', 'black')

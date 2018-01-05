@@ -3,17 +3,14 @@
 const store = require('../store')
 
 const signUpSuccess = function (data) {
-  console.log(data)
   $('#lblSignUpMessage').text('User ' + data.user.email + ' successfully created.').css({'color': 'green', 'background-color': 'white'})
 }
 
-const signUpFailure = function (error) {
-  console.error(error)
+const signUpFailure = function () {
   $('#lblSignUpMessage').text('Error during sign up').css({'color': 'red', 'background-color': 'white'})
 }
 
 const signInSuccess = function (data) {
-  console.log(data)
   store.user = data.user
   $('.userlogin').hide()
   $('#game-page').show()
@@ -24,13 +21,11 @@ const signInSuccess = function (data) {
   $('#lbl-board-message').text('Select an option below to begin').css({'color': '#0F2043', 'background-color': 'white', 'width': '300px'})
 }
 
-const signInFailure = function (error) {
-  console.error(error)
+const signInFailure = function () {
   $('#lblSignInMessage').text('Error during sign in').css({'color': 'red', 'background-color': 'white'})
 }
 
 const changePasswordSuccess = function () {
-  console.log('Successfully changed password')
   $('#lblChangePasswordMessage')
     .text('Successfully changed password')
     .css({'color': 'green', 'background-color': 'white'})
@@ -39,8 +34,7 @@ const changePasswordSuccess = function () {
   $('#change-password-link').text('Change Password')
 }
 
-const changePasswordFailure = function (error) {
-  console.error(error)
+const changePasswordFailure = function () {
   $('#lblChangePasswordMessage').text('Error during change password').css({'color': 'red', 'background-color': 'white'})
 }
 
@@ -53,8 +47,7 @@ const signOutSuccess = function () {
   $('#lblSignUpMessage').text('')
 }
 
-const signOutFailure = function (error) {
-  console.error(error)
+const signOutFailure = function () {
   $('#lblSignOutMessage').text('Error during sign out').css({'color': 'red', 'background-color': 'white'})
 }
 

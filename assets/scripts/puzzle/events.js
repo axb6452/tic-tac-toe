@@ -9,22 +9,14 @@ const store = require('../store')
 let countRows = 0
 const checkResult = function (array) {
   if ((array[2] === array[4]) && (array[4] === array[6]) && array[2] !== '' && array[4] !== '' && array[6] !== '') {
-    console.log('You win')
-    // $('td[id=2]').css('textDecoration', 'line-through')
-    // $('td[id=4]').css('textDecoration', 'line-through')
-    // $('td[id=6]').css('textDecoration', 'line-through')
     return true
   } else if ((array[0] === array[4]) && (array[4] === array[8]) && array[0] !== '' && array[4] !== '' && array[8] !== '') {
-    console.log('You win')
     return true
   } else if ((array[0] === array[3]) && (array[3] === array[6]) && array[0] !== '' && array[3] !== '' && array[6] !== '') {
-    console.log('You win')
     return true
   } else if ((array[1] === array[4]) && (array[4] === array[7]) && array[1] !== '' && array[4] !== '' && array[7] !== '') {
-    console.log('You win')
     return true
   } else if ((array[2] === array[5]) && (array[5] === array[8]) && array[2] !== '' && array[5] !== '' && array[8] !== '') {
-    console.log('You win')
     return true
   } else {
     let tempArray = []
@@ -33,7 +25,6 @@ const checkResult = function (array) {
       tempArray.push(array[i])
       if (tempArray.length === 3) {
         if ((tempArray[0] === tempArray[1]) && (tempArray[1] === tempArray[2]) && tempArray[0] !== '' && tempArray[1] !== '' && tempArray[2] !== '') {
-          console.log('You win')
           return true
         } else if (tempArray[0] !== '' && tempArray[1] !== '' && tempArray[2] !== '') {
           countRows++
@@ -48,30 +39,14 @@ const checkResult = function (array) {
   return false
 }
 
-// let cells = new Array(9)
-// console.log('game object is ' + store.game)
-// if (store.game) {
-//   cells = store.game.cells
-// } else {
-//   cells.fill('')
-// }
-// console.log(cells)
-// let result = false
 store.currentSymbol = 'o'
 const onInsertSymbol = function (event) {
-  console.log($(event.target).text())
-  console.log('td position top is ' + $(event.target).position().top)
-  console.log('td position left is ' + $(event.target).position().left)
-  console.log(store.currentSymbol)
   if (store.game.over === false && $(event.target).text() === '') {
     if (store.currentSymbol === 'o') {
       store.currentSymbol = 'x'
       event.target.append(store.currentSymbol)
       store.game.cells[parseInt(event.target.id)] = store.currentSymbol
       store.game.over = checkResult(store.game.cells)
-      console.log(store.game.cells)
-      console.log('result is ' + store.game.over)
-      console.log('countRows is ' + countRows)
       if (store.game.over) {
         $('#lbl-board-message').text('X wins!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
         $('.td0').text((parseInt($('.td0').text()) + 1))
@@ -97,9 +72,6 @@ const onInsertSymbol = function (event) {
       event.target.append(store.currentSymbol)
       store.game.cells[parseInt(event.target.id)] = store.currentSymbol
       store.game.over = checkResult(store.game.cells)
-      console.log(store.game.cells)
-      console.log('result is ' + store.game.over)
-      console.log('countRows is ' + countRows)
       if (store.game.over) {
         $('#lbl-board-message').text('O wins!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
         $('.td2').text((parseInt($('.td2').text()) + 1))
@@ -129,7 +101,6 @@ const onInsertSymbol = function (event) {
 }
 
 const onJoinAsO = function (event) {
-  console.log(event.target)
   event.preventDefault()
   const data = '{}'
   puzzleApi.joinAsO(data)
@@ -138,7 +109,6 @@ const onJoinAsO = function (event) {
 }
 
 const onGetAllCompletedGames = function (event) {
-  console.log(event.target)
   event.preventDefault()
   puzzleApi.getAllCompletedGames()
     .then(puzzleUi.getAllCompletedGamesSuccess)
@@ -146,7 +116,6 @@ const onGetAllCompletedGames = function (event) {
 }
 
 const onGetAllIncompleteGames = function (event) {
-  console.log(event.target)
   event.preventDefault()
   puzzleApi.getAllIncompleteGames()
     .then(puzzleUi.getAllIncompleteGamesSuccess)
@@ -154,7 +123,6 @@ const onGetAllIncompleteGames = function (event) {
 }
 
 const onCreateGame = function (event) {
-  console.log(event.target)
   event.preventDefault()
   puzzleApi.createGame()
     .then(puzzleUi.createGameSuccess)
@@ -162,22 +130,18 @@ const onCreateGame = function (event) {
 }
 
 const onGetSingleCompletedGame = function (event) {
-  console.log(event.target)
   event.preventDefault()
   $('#myModal').modal('toggle')
   const gameId = $('#txt-get-completed-game').val()
-  console.log('game id is ' + gameId)
   puzzleApi.getSingleGame(gameId)
     .then(puzzleUi.getSingleGameSuccess)
     .catch(puzzleUi.getSingleGameFailure)
 }
 
 const onGetSingleIncompleteGame = function (event) {
-  console.log(event.target)
   event.preventDefault()
   $('#myModal2').modal('toggle')
   const gameId = $('#txt-get-incomplete-game').val()
-  console.log('game id is ' + gameId)
   puzzleApi.getSingleGame(gameId)
     .then(puzzleUi.getSingleGameSuccess)
     .catch(puzzleUi.getSingleGameFailure)

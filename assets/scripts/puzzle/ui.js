@@ -76,13 +76,10 @@ const store = require('../store')
 // }
 
 const createGameSuccess = function (data) {
-  console.log('data: ', data)
-  console.log('game is: ' + data.game.id)
   store.currentSymbol = 'o'
   store.game = data.game
   // gameWatcher = resourceWatcher(config.apiOrigin + '/games/' + store.game.id + '/watch', {Authorization: 'Token token=' + store.user.token})
   // gameWatcher.on('change', onChange)
-  console.log(store.game.cells)
   for (let i = 0; i < store.game.cells.length; i++) {
     $('#' + i).text(store.game.cells[i])
   }
@@ -97,23 +94,17 @@ const createGameFailure = function () {
 }
 
 const updateGameSuccess = function (data) {
-  console.log('data')
 }
 
 const updateGameFailure = function (data) {
   $('#lbl-board-message').text('Error during update').css({'background-color': 'white', 'color': 'red', 'width': '300px'})
-  // const gameWatcher.on('error', function (e) {
-  //   console.error('an error has occurred with the stream', e)
-  // })
 }
 
 const joinAsOSuccess = function (data) {
-  console.log('data: ', data)
   store.currentSymbol = 'x'
   store.game = data.game
   // gameWatcher = resourceWatcher(config.apiOrigin + '/games/' + $('#game-id-o').val() + '/watch', {Authorization: 'Token token=' + store.user.token})
   // gameWatcher.on('change', onChange)
-  console.log(store.game)
   for (let i = 0; i < store.game.cells.length; i++) {
     $('#' + i).text(store.game.cells[i])
   }
@@ -127,11 +118,7 @@ const joinAsOFailure = function (data) {
 }
 
 const getSingleGameSuccess = function (data) {
-  console.log('data: ', data)
-  console.log('game is: ' + data.game.id)
   store.game = data.game
-  console.log(store.game.cells)
-  console.log('id is ' + store.game.id)
   let xCount = 0
   let oCount = 0
   let blankCount = 0
@@ -145,7 +132,6 @@ const getSingleGameSuccess = function (data) {
       blankCount++
     }
   }
-  console.log('blanks: ' + blankCount)
   if (store.game.over === false) {
     if (xCount > oCount && xCount !== 0) {
       store.currentSymbol = 'x'
@@ -166,15 +152,6 @@ const getSingleGameSuccess = function (data) {
       }
     } else {
       const cells = store.game.cells
-      console.log(((cells[0] === cells[1]) && (cells[1] === cells[2]) && cells[0] === 'x'))
-      console.log(((cells[3] === cells[4]) && (cells[4] === cells[5]) && cells[3] === 'x'))
-      console.log(((cells[6] === cells[7]) && (cells[7] === cells[8]) && cells[6] === 'x'))
-      console.log(((cells[0] === cells[3]) && (cells[3] === cells[6]) && cells[0] === 'x'))
-      console.log(((cells[1] === cells[4]) && (cells[4] === cells[7]) && cells[1] === 'x'))
-      console.log(((cells[2] === cells[5]) && (cells[5] === cells[8]) && cells[2] === 'x'))
-      console.log(((cells[0] === cells[4]) && (cells[4] === cells[8]) && cells[0] === 'x'))
-      console.log(((cells[2] === cells[4]) && (cells[4] === cells[6]) && cells[2] === 'x'))
-      let result
       if (((cells[0] === cells[1]) && (cells[1] === cells[2]) && cells[0] === 'x') ||
          ((cells[3] === cells[4]) && (cells[4] === cells[5]) && cells[3] === 'x') ||
          ((cells[6] === cells[7]) && (cells[7] === cells[8]) && cells[6] === 'x') ||
@@ -183,12 +160,8 @@ const getSingleGameSuccess = function (data) {
          ((cells[2] === cells[5]) && (cells[5] === cells[8]) && cells[2] === 'x') ||
          ((cells[0] === cells[4]) && (cells[4] === cells[8]) && cells[0] === 'x') ||
          ((cells[2] === cells[4]) && (cells[4] === cells[6]) && cells[2] === 'x')) {
-        result = true
-        console.log(result)
         $('#lbl-board-message').text('X won!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
       } else {
-        result = false
-        console.log(result)
         $('#lbl-board-message').text('Ugh, it was a draw.').css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
       }
     }
@@ -202,12 +175,13 @@ const getSingleGameFailure = function () {
 }
 
 const getAllCompletedGamesSuccess = function (data) {
-  console.log('data: ', data)
   $('.modal-body').html('')
   $('.modal-body').css({'height': '100px', 'font-size': '14px', 'text-align': 'center'})
   if (data.games.length === 0) {
-    $('.modal-body').append('No games completed yet')
+    $('.modal-body').append('You have no complete games')
+    $('#btn-get-completed-game').attr('disabled', 'disabled')
   } else {
+    $('#btn-get-completed-game').removeAttr('disabled')
     for (let i = 0; i < data.games.length; i++) {
       $('.modal-body').append('<ul>game id: ' + data.games[i].id + '</ul><br>')
       if (data.games.length > 5) {
@@ -215,9 +189,6 @@ const getAllCompletedGamesSuccess = function (data) {
       }
     }
   }
-
-  // $('#game-table').hide()
-  // $('#lbl-board-message').text('Enter game id to view result').css({'color': '#0F2043', 'background-color': 'white', 'width': '560px'})
 }
 
 const getAllCompletedGamesFailure = function (data) {
@@ -228,8 +199,10 @@ const getAllIncompleteGamesSuccess = function (data) {
   $('.modal-body').html('')
   $('.modal-body').css({'height': '100px', 'font-size': '14px', 'text-align': 'center'})
   if (data.games.length === 0) {
-    $('.modal-body').append('You have not played any games yet')
+    $('.modal-body').append('You have no incomplete games')
+    $('#btn-get-incomplete-game').attr('disabled', 'disabled')
   } else {
+    $('#btn-get-incomplete-game').removeAttr('disabled')
     for (let i = 0; i < data.games.length; i++) {
       $('.modal-body').append('<ul>game id: ' + data.games[i].id + '</ul><br>')
       if (data.games.length > 5) {
@@ -237,10 +210,6 @@ const getAllIncompleteGamesSuccess = function (data) {
       }
     }
   }
-
-  // console.log('data: ', data)
-  // $('#game-table').hide()
-  // $('#lbl-board-message').text('Check console for a list of incomplete games. Enter game id to resume game').css({'color': '#0F2043', 'background-color': 'white', 'width': '600px'})
 }
 
 const getAllIncompleteGamesFailure = function (data) {
