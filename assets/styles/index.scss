@@ -130,11 +130,11 @@ img {
   padding: 1px 0 20px;
   text-align: center;
   width: 80px;
-}
 
-.btnsubmit:hover {
-  background-color: #79CEDC;
-  color: #000;
+  &:hover {
+    background-color: #79CEDC;
+    color: #000;
+  }
 }
 
 .game-table {
@@ -336,7 +336,7 @@ footer {
   font-size: 14px;
   font-weight: 500;
   letter-spacing: .08em;
-  margin-top: 200px;
+  margin-top: 300px;
   padding: 0 20px;
   text-shadow: 1px 1px #D5A458;
   text-transform: uppercase;

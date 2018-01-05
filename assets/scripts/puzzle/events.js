@@ -3,8 +3,6 @@
 const puzzleApi = require('./api.js')
 const puzzleUi = require('./ui.js')
 const store = require('../store')
-// const config = require('../config')
-// const getFormFields = require('../../../lib/get-form-fields')
 
 let countRows = 0
 const checkResult = function (array) {
@@ -96,8 +94,6 @@ const onInsertSymbol = function (event) {
   } else {
     $('#lbl-board-message').text('Invalid click.').css({'color': 'red', 'background-color': 'white', 'width': '200px'})
   }
-  // const clickedCell = $(event.target).closest('td')
-  // clickedCell.Add('o')
 }
 
 const onJoinAsO = function (event) {
@@ -131,20 +127,32 @@ const onCreateGame = function (event) {
 
 const onGetSingleCompletedGame = function (event) {
   event.preventDefault()
-  $('#myModal').modal('toggle')
-  const gameId = $('#txt-get-completed-game').val()
-  puzzleApi.getSingleGame(gameId)
-    .then(puzzleUi.getSingleGameSuccess)
-    .catch(puzzleUi.getSingleGameFailure)
+  if ($('#txt-get-completed-game').val() === '') {
+    $('#txt-get-completed-game').css({'border': 'solid', 'border-color': 'red'})
+    return false
+  } else {
+    $('#myModal').modal('toggle')
+    $('#txt-get-completed-game').css('border', '0')
+    const gameId = $('#txt-get-completed-game').val()
+    puzzleApi.getSingleGame(gameId)
+      .then(puzzleUi.getSingleGameSuccess)
+      .catch(puzzleUi.getSingleGameFailure)
+  }
 }
 
 const onGetSingleIncompleteGame = function (event) {
   event.preventDefault()
-  $('#myModal2').modal('toggle')
-  const gameId = $('#txt-get-incomplete-game').val()
-  puzzleApi.getSingleGame(gameId)
-    .then(puzzleUi.getSingleGameSuccess)
-    .catch(puzzleUi.getSingleGameFailure)
+  if ($('#txt-get-incomplete-game').val() === '') {
+    $('#txt-get-incomplete-game').css({'border': 'solid', 'border-color': 'red'})
+    return false
+  } else {
+    $('#myModal2').modal('toggle')
+    $('#txt-get-incomplete-game').css('border', '0')
+    const gameId = $('#txt-get-incomplete-game').val()
+    puzzleApi.getSingleGame(gameId)
+      .then(puzzleUi.getSingleGameSuccess)
+      .catch(puzzleUi.getSingleGameFailure)
+  }
 }
 
 const onBeforeUnload = function (event) {
@@ -154,9 +162,9 @@ const onBeforeUnload = function (event) {
 }
 
 const onLoad = function (event) {
-  const xWins = localStorage.getItem('totalXWins') === (undefined || null || '' || 'NaN') ? '0' : localStorage.getItem('totalXWins')
-  const draws = localStorage.getItem('totalDraws') === (undefined || null || '' || 'NaN') ? '0' : localStorage.getItem('totalDraws')
-  const oWins = localStorage.getItem('totalOWins') === (undefined || null || '' || 'NaN') ? '0' : localStorage.getItem('totalOWins')
+  const xWins = localStorage.getItem('totalXWins') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalXWins')
+  const draws = localStorage.getItem('totalDraws') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalDraws')
+  const oWins = localStorage.getItem('totalOWins') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalOWins')
 
   $('.td0').text(xWins)
   $('.td1').text(draws)

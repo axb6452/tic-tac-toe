@@ -85,7 +85,6 @@ const createGameSuccess = function (data) {
   }
   $('#lbl-board-message').text('Game created: X starts').css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
   $('#game-table').show()
-  // $('#game-table').attr('disabled', 'enabled')
   $('#game-table td').hover(function () { $(this).css({'background-color': '#79CEDC', 'color': 'black'}) }, function () { $(this).css({'background-color': '#0F2043', 'color': 'white'}) })
 }
 
