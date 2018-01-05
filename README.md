@@ -2,8 +2,10 @@ Techologies used:
 
 1) HTML
 2) css
-3) JavaScript - jQuery
-4) Atom.io framework
+3) Bootstrap-sass
+4) Bootstrap HTML templates
+5) JavaScript - jQuery
+6) Atom.io framework
 
 Planning:
 
@@ -200,4 +202,6 @@ buttons to retrieve incomplete and complete games. This would prevent having to
 enter the game id each time in order to retrieve a game.
 - I would provide the option to play the game against Artifical
 Intelligence (AI).
+- I also need to properly resolve the win counter local storage issues and
+ensure proper functionality under all circumstances. 
 - Connect winning symbol combos with a straight line through their center points.
