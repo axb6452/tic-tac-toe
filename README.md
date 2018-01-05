@@ -192,7 +192,7 @@ results table. Included borders around respective sections.
 inputs.
 - Also need to ensure that the game is multi device.
 
-Problems to be fixed/Enhancements to be made:
+Problems to be fixed/Developments to be made:
 
 - One major issue that I need to look closely into is Multiplayer functionality.
 Specifically, I need to ensure that connections to the API are closed in a
@@ -203,5 +203,8 @@ enter the game id each time in order to retrieve a game.
 - I would provide the option to play the game against Artifical
 Intelligence (AI).
 - I also need to properly resolve the win counter local storage issues and
-ensure proper functionality under all circumstances. 
+ensure proper functionality under all circumstances.
 - Connect winning symbol combos with a straight line through their center points.
+
+Wireframe and user stories:
+https://drive.google.com/open?id=1TLrmlNbaQwNedbvfTX9GRvXcKj10shRa
