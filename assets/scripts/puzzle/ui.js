@@ -1,7 +1,8 @@
 'use strict'
 
 const store = require('../store')
-// const config = require('../config')
+const puzzleApi = require('./api.js')
+
 //
 // let gameWatcher
 // const resourceWatcher = function (url, conf) {
@@ -75,9 +76,26 @@ const store = require('../store')
 //   }
 // }
 
+const createAIGameSuccess = function (data) {
+  store.currentSymbol = 'o'
+  store.game = data.game
+  store.ai = true
+  for (let i = 0; i < store.game.cells.length; i++) {
+    $('#' + i).text(store.game.cells[i])
+  }
+  $('#lbl-board-message').text('Game created: X starts').css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
+  $('#game-table').show()
+  $('#game-table td').hover(function () { $(this).css({'background-color': '#79CEDC', 'color': 'black'}) }, function () { $(this).css({'background-color': '#0F2043', 'color': 'white'}) })
+}
+
+const createAIGameFailure = function () {
+  $('#lbl-board-message').text('Error Creating game').css({'background-color': 'white', 'color': 'red', 'width': '300px'})
+}
+
 const createGameSuccess = function (data) {
   store.currentSymbol = 'o'
   store.game = data.game
+  store.ai = false
   // gameWatcher = resourceWatcher(config.apiOrigin + '/games/' + store.game.id + '/watch', {Authorization: 'Token token=' + store.user.token})
   // gameWatcher.on('change', onChange)
   for (let i = 0; i < store.game.cells.length; i++) {
@@ -92,7 +110,471 @@ const createGameFailure = function () {
   $('#lbl-board-message').text('Error Creating game').css({'background-color': 'white', 'color': 'red', 'width': '300px'})
 }
 
+const checkCombination = function (array1, array2, move) {
+  if (array1.includes(0) && array1.includes(1) && !array2.includes(2)) {
+    $('#' + 2).text('o')
+    store.game.cells[2] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 2, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 2, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(1) && array1.includes(2) && !array2.includes(0)) {
+    $('#' + 0).text('o')
+    store.game.cells[0] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 0, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 0, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(0) && array1.includes(2) && !array2.includes(1)) {
+    $('#' + 1).text('o')
+    store.game.cells[1] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 1, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 1, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(3) && array1.includes(4) && !array2.includes(5)) {
+    $('#' + 5).text('o')
+    store.game.cells[5] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 5, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 5, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(4) && array1.includes(5) && !array2.includes(3)) {
+    $('#' + 3).text('o')
+    store.game.cells[3] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 3, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 3, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(3) && array1.includes(5) && !array2.includes(4)) {
+    $('#' + 4).text('o')
+    store.game.cells[4] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 4, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 4, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(6) && array1.includes(7) && !array2.includes(8)) {
+    $('#' + 8).text('o')
+    store.game.cells[8] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 8, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 8, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(7) && array1.includes(8) && !array2.includes(6)) {
+    $('#' + 6).text('o')
+    store.game.cells[6] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 6, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 6, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(6) && array1.includes(8) && !array2.includes(7)) {
+    $('#' + 7).text('o')
+    store.game.cells[7] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 7, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 7, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(0) && array1.includes(3) && !array2.includes(6)) {
+    $('#' + 6).text('o')
+    store.game.cells[6] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 6, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 6, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(3) && array1.includes(6) && !array2.includes(0)) {
+    $('#' + 0).text('o')
+    store.game.cells[0] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 0, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 0, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(0) && array1.includes(6) && !array2.includes(3)) {
+    $('#' + 3).text('o')
+    store.game.cells[3] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 3, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 3, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(1) && array1.includes(4) && !array2.includes(7)) {
+    $('#' + 7).text('o')
+    store.game.cells[7] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 7, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 7, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(4) && array1.includes(7) && !array2.includes(1)) {
+    $('#' + 1).text('o')
+    store.game.cells[1] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 1, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 1, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(1) && array1.includes(7) && !array2.includes(4)) {
+    $('#' + 4).text('o')
+    store.game.cells[4] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 4, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 4, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(2) && array1.includes(5) && !array2.includes(8)) {
+    $('#' + 8).text('o')
+    store.game.cells[8] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 8, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 8, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(5) && array1.includes(8) && !array2.includes(2)) {
+    $('#' + 2).text('o')
+    store.game.cells[2] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 2, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 2, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(2) && array1.includes(8) && !array2.includes(5)) {
+    $('#' + 5).text('o')
+    store.game.cells[5] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 5, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 5, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(0) && array1.includes(4) && !array2.includes(8)) {
+    $('#' + 8).text('o')
+    store.game.cells[8] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 8, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 8, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(4) && array1.includes(8) && !array2.includes(0)) {
+    $('#' + 0).text('o')
+    store.game.cells[0] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 0, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 0, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(0) && array1.includes(8) && !array2.includes(4)) {
+    $('#' + 4).text('o')
+    store.game.cells[4] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 4, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 4, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(2) && array1.includes(4) && !array2.includes(6)) {
+    $('#' + 6).text('o')
+    store.game.cells[6] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 6, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 6, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(4) && array1.includes(6) && !array2.includes(2)) {
+    $('#' + 2).text('o')
+    store.game.cells[2] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 2, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 2, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  } else if (array1.includes(2) && array1.includes(6) && !array2.includes(4)) {
+    $('#' + 4).text('o')
+    store.game.cells[4] = 'o'
+    store.currentSymbol = 'o'
+    if (move === 'win') {
+      const updateGameData = {'game': {'cell': {'index': 4, 'value': store.currentSymbol}, 'over': true}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    } else {
+      const updateGameData = {'game': {'cell': {'index': 4, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+    }
+    return true
+  }
+  return false
+}
+
+const makeBestMove = function (array1, array2) {
+  if (array1.includes(4)) {
+    if (!array2.includes(0) && !array1.includes(0)) {
+      $('#' + 0).text('o')
+      store.game.cells[0] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 0, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(2) && !array1.includes(2)) {
+      $('#' + 2).text('o')
+      store.game.cells[2] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 2, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(6) && !array1.includes(6)) {
+      $('#' + 6).text('o')
+      store.game.cells[6] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 6, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(8) && !array1.includes(8)) {
+      $('#' + 8).text('o')
+      store.game.cells[8] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 8, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(1) && !array1.includes(1)) {
+      $('#' + 1).text('o')
+      store.game.cells[1] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 1, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(3) && !array1.includes(3)) {
+      $('#' + 3).text('o')
+      store.game.cells[3] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 3, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(5) && !array1.includes(5)) {
+      $('#' + 5).text('o')
+      store.game.cells[5] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 5, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(7) && !array1.includes(7)) {
+      $('#' + 7).text('o')
+      store.game.cells[7] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 7, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    }
+  } else {
+    if (!array2.includes(4) && !array1.includes(4)) {
+      $('#' + 4).text('o')
+      store.game.cells[4] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 4, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(1) && !array1.includes(1)) {
+      $('#' + 1).text('o')
+      store.game.cells[1] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 1, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(3) && !array1.includes(3)) {
+      $('#' + 3).text('o')
+      store.game.cells[3] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 3, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(5) && !array1.includes(5)) {
+      $('#' + 5).text('o')
+      store.game.cells[5] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 5, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(7) && !array1.includes(7)) {
+      $('#' + 7).text('o')
+      store.game.cells[7] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 7, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(0) && !array1.includes(0)) {
+      $('#' + 0).text('o')
+      store.game.cells[0] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 0, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(2) && !array1.includes(2)) {
+      $('#' + 2).text('o')
+      store.game.cells[2] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 2, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(6) && !array1.includes(6)) {
+      $('#' + 6).text('o')
+      store.game.cells[6] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 6, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    } else if (!array2.includes(8) && !array1.includes(8)) {
+      $('#' + 8).text('o')
+      store.game.cells[8] = 'o'
+      store.currentSymbol = 'o'
+      const updateGameData = {'game': {'cell': {'index': 8, 'value': store.currentSymbol}, 'over': false}}
+      puzzleApi.updateGame(updateGameData).then(updateAIGameSuccess).catch(updateAIGameFailure)
+      return true
+    }
+  }
+}
+
+const updateAIGameSuccess = function (data) {
+  store.game = data.game
+  if (store.game.over) {
+    $('#lbl-board-message').text('You lose!').css({'color': 'red', 'background-color': 'white', 'width': '200px'})
+    $('.td2').text((parseInt($('.td2').text()) + 1))
+  } else {
+    $('#lbl-board-message').text("It's X's turn!").css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
+  }
+}
+
+const updateAIGameFailure = function (data) {
+  $('#lbl-board-message').text('Error during update').css({'background-color': 'white', 'color': 'red', 'width': '300px'})
+}
+
 const updateGameSuccess = function (data) {
+  console.log('ai ? ' + store.ai)
+  store.game = data.game
+  if (store.ai === true && store.game.over === false) {
+    let xCount = 0
+    let oCount = 0
+    const xindices = []
+    const oindices = []
+    for (let i = 0; i < store.game.cells.length; i++) {
+      if (store.game.cells[i] === 'x') {
+        xCount++
+        xindices.push(i)
+      } else if (store.game.cells[i] === 'o') {
+        oCount++
+        oindices.push(i)
+      }
+    }
+    if (xCount > oCount) {
+      if (xCount > 1) {
+        const aiWin = checkCombination(oindices, xindices, 'win')
+        if (aiWin === false) {
+          const aiBlock = checkCombination(xindices, oindices, 'block')
+          if (aiBlock === false) {
+            makeBestMove(xindices, oindices)
+          }
+        }
+      } else {
+        makeBestMove(xindices, oindices)
+      }
+    }
+  }
 }
 
 const updateGameFailure = function (data) {
@@ -218,8 +700,12 @@ const getAllIncompleteGamesFailure = function (data) {
 module.exports = {
   createGameSuccess,
   createGameFailure,
+  createAIGameSuccess,
+  createAIGameFailure,
   updateGameSuccess,
   updateGameFailure,
+  updateAIGameSuccess,
+  updateAIGameFailure,
   joinAsOSuccess,
   joinAsOFailure,
   getSingleGameSuccess,

@@ -125,6 +125,13 @@ const onCreateGame = function (event) {
     .catch(puzzleUi.createGameFailure)
 }
 
+const onPlayVsAI = function (event) {
+  event.preventDefault()
+  puzzleApi.createGame()
+    .then(puzzleUi.createAIGameSuccess)
+    .catch(puzzleUi.createAIGameFailure)
+}
+
 const onGetSingleCompletedGame = function (event) {
   event.preventDefault()
   if ($('#txt-get-completed-game').val() === '') {
@@ -183,6 +190,17 @@ const doNavigation = function (event) {
   }
 }
 
+// const setAIMode = function (event) {
+//   debugger
+//   event.preventDefault()
+//   console.log(event.currentTarget.checked)
+//   if (event.currentTarget.checked) {
+//     store.ai = true
+//   } else {
+//     store.ai = false
+//   }
+// }
+
 const addHandlers = function () {
   $('#game-table').on('click', 'td', onInsertSymbol)
   $('#btn-create-game').on('click', onCreateGame)
@@ -193,6 +211,8 @@ const addHandlers = function () {
   $(window).on('beforeunload', onBeforeUnload)
   $('a').on('click', doNavigation)
   $('#btn-enterasO').on('click', onJoinAsO)
+  $('#btn-machine-game').on('click', onPlayVsAI)
+  // $('#chk-machine-game').on('change', setAIMode)
 }
 
 module.exports = {
