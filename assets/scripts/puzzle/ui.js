@@ -165,6 +165,8 @@ const getSingleGameSuccess = function (data) {
       }
     }
   }
+  $('#txt-get-completed-game').val('')
+  $('#txt-get-incomplete-game').val('')
   $('#game-table').show()
   $('#game-table td').hover(function () { $(this).css({'background-color': '#79CEDC', 'color': 'black'}) }, function () { $(this).css({'background-color': '#0F2043', 'color': 'white'}) })
 }
@@ -178,9 +180,13 @@ const getAllCompletedGamesSuccess = function (data) {
   $('.modal-body').css({'height': '100px', 'font-size': '14px', 'text-align': 'center'})
   if (data.games.length === 0) {
     $('.modal-body').append('You have no complete games')
-    $('#btn-get-completed-game').attr('disabled', 'disabled')
+    $('#txt-get-completed-game').hide()
+    $('#btn-get-completed-game').hide()
+    // $('#btn-get-completed-game').attr('disabled', 'disabled')
   } else {
-    $('#btn-get-completed-game').removeAttr('disabled')
+    $('#txt-get-completed-game').show()
+    $('#btn-get-completed-game').show()
+    // $('#btn-get-completed-game').removeAttr('disabled')
     for (let i = 0; i < data.games.length; i++) {
       $('.modal-body').append('<ul>game id: ' + data.games[i].id + '</ul><br>')
       if (data.games.length > 5) {
@@ -199,9 +205,13 @@ const getAllIncompleteGamesSuccess = function (data) {
   $('.modal-body').css({'height': '100px', 'font-size': '14px', 'text-align': 'center'})
   if (data.games.length === 0) {
     $('.modal-body').append('You have no incomplete games')
-    $('#btn-get-incomplete-game').attr('disabled', 'disabled')
+    $('#txt-get-incomplete-game').hide()
+    $('#btn-get-incomplete-game').hide()
+    // $('#btn-get-incomplete-game').attr('disabled', 'disabled')
   } else {
-    $('#btn-get-incomplete-game').removeAttr('disabled')
+    $('#txt-get-incomplete-game').show()
+    $('#btn-get-incomplete-game').show()
+    // $('#btn-get-incomplete-game').removeAttr('disabled')
     for (let i = 0; i < data.games.length; i++) {
       $('.modal-body').append('<ul>game id: ' + data.games[i].id + '</ul><br>')
       if (data.games.length > 5) {
