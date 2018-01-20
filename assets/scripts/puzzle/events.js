@@ -156,19 +156,33 @@ const onGetSingleIncompleteGame = function (event) {
 }
 
 const onBeforeUnload = function (event) {
-  localStorage.setItem('totalXWins', $('.td0').text())
-  localStorage.setItem('totalDraws', $('.td1').text())
-  localStorage.setItem('totalOWins', $('.td2').text())
+  if (store.user) {
+    localStorage.clear()
+    localStorage.setItem('totalXWins', $('.td0').text())
+    localStorage.setItem('totalDraws', $('.td1').text())
+    localStorage.setItem('totalOWins', $('.td2').text())
+  }
 }
 
 const onLoad = function (event) {
-  const xWins = localStorage.getItem('totalXWins') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalXWins')
-  const draws = localStorage.getItem('totalDraws') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalDraws')
-  const oWins = localStorage.getItem('totalOWins') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalOWins')
+  // const xWins = localStorage.getItem('totalXWins') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalXWins')
+  // const draws = localStorage.getItem('totalDraws') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalDraws')
+  // const oWins = localStorage.getItem('totalOWins') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalOWins')
+  const xWins = localStorage.getItem('totalXWins')
+  const draws = localStorage.getItem('totalDraws')
+  const oWins = localStorage.getItem('totalOWins')
 
-  $('.td0').text(xWins)
-  $('.td1').text(draws)
-  $('.td2').text(oWins)
+  if (xWins !== null) {
+    $('.td0').text(xWins)
+  }
+
+  if (oWins !== null) {
+    $('.td2').text(oWins)
+  }
+
+  if (draws !== null) {
+    $('.td1').text(draws)
+  }
 }
 
 const doNavigation = function (event) {
