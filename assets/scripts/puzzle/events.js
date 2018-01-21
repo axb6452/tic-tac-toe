@@ -197,6 +197,11 @@ const doNavigation = function (event) {
   }
 }
 
+const onClearInputs = function (event) {
+  $('#txt-get-incomplete-game').val('')
+  $('#txt-get-completed-game').val('')
+}
+
 const addHandlers = function () {
   $('#game-table').on('click', 'td', onInsertSymbol)
   $('#btn-create-game').on('click', onCreateGame)
@@ -207,6 +212,8 @@ const addHandlers = function () {
   $(window).on('beforeunload', onBeforeUnload)
   $('a').on('click', doNavigation)
   $('#btn-enterasO').on('click', onJoinAsO)
+  $('#myModal').on('hidden.bs.modal', onClearInputs)
+  $('#myModal2').on('hidden.bs.modal', onClearInputs)
 }
 
 module.exports = {
