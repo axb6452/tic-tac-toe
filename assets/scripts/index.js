@@ -21,5 +21,4 @@ $(() => {
   $('#game-page').hide()
   gameAuth.addHandlers()
   gameEvents.addHandlers()
-  $('#game-page').on('load', gameEvents.onLoad())
 })

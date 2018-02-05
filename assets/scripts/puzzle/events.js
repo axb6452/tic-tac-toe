@@ -168,16 +168,6 @@ const onBeforeUnload = function (event) {
   localStorage.setItem('totalOWins', $('.td2').text())
 }
 
-const onLoad = function (event) {
-  const xWins = localStorage.getItem('totalXWins') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalXWins')
-  const draws = localStorage.getItem('totalDraws') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalDraws')
-  const oWins = localStorage.getItem('totalOWins') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalOWins')
-
-  $('.td0').text(xWins)
-  $('.td1').text(draws)
-  $('.td2').text(oWins)
-}
-
 const doNavigation = function (event) {
   if (this.hash !== '') {
     event.preventDefault()
@@ -216,6 +206,5 @@ const addHandlers = function () {
 }
 
 module.exports = {
-  addHandlers,
-  onLoad
+  addHandlers
 }
