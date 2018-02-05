@@ -125,6 +125,13 @@ const onCreateGame = function (event) {
     .catch(puzzleUi.createGameFailure)
 }
 
+const onPlayVsAI = function (event) {
+  event.preventDefault()
+  puzzleApi.createGame()
+    .then(puzzleUi.createAIGameSuccess)
+    .catch(puzzleUi.createAIGameFailure)
+}
+
 const onGetSingleCompletedGame = function (event) {
   event.preventDefault()
   if ($('#txt-get-completed-game').val() === '') {
@@ -214,6 +221,7 @@ const addHandlers = function () {
   $('#btn-enterasO').on('click', onJoinAsO)
   $('#myModal').on('hidden.bs.modal', onClearInputs)
   $('#myModal2').on('hidden.bs.modal', onClearInputs)
+  $('#btn-machine-game').on('click', onPlayVsAI)
 }
 
 module.exports = {
