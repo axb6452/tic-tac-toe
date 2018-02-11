@@ -95,6 +95,7 @@ const createAIGameFailure = function () {
 const createGameSuccess = function (data) {
   store.currentSymbol = 'o'
   store.game = data.game
+  store.ai = false
   // gameWatcher = resourceWatcher(config.apiOrigin + '/games/' + store.game.id + '/watch', {Authorization: 'Token token=' + store.user.token})
   // gameWatcher.on('change', onChange)
   for (let i = 0; i < store.game.cells.length; i++) {
