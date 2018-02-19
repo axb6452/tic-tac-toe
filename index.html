@@ -85,6 +85,7 @@
       <h2>Game</h2>
    <!-- <p>Game Score: <label id="scoreLabel">0</label></p> -->
   <label class="boardmessage" id="lbl-board-message">X starts</label>
+  <label class="checkbox-inline" id="lbl-ai"><input type="checkbox" id="chk-ai" class="chkai">Play vs Computer</label>
   <br>
    <div id="game-board" class="board clearfix">
    <table id="game-table" class="game-table">
@@ -104,6 +105,8 @@
        <td id="8"></td>
      </tr>
    </table>
+   <br>
+   <label id="lbl-game" class="lblgame"></label>
    </div>
    <br>
    <div class="forminputs">
@@ -179,11 +182,6 @@
              <button type="submit" id="btn-get-game" class="btn btn-default">Get Game</button> -->
          <!-- </form> -->
        <!-- </td> -->
-       <td>
-         <form class="games" id="game-machine">
-           <button type="submit" id="btn-machine-game" class="btn btn-default">Play Against Computer</button>
-         </form>
-      </td>
      </tr>
    </table>
    </div>

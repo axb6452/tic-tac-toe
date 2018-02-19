@@ -104,7 +104,6 @@ body {
   background-color: #0F2043;
   background-position: center;
   background-size: cover;
-  // color: #fff;
   font-family: 'Times New Roman', sans-serif;
   margin: 0;
   text-align: center;
@@ -129,6 +128,17 @@ img {
     background-color: #79CEDC;
     color: #000;
   }
+}
+
+.boardmessage {
+  margin-left: 220px;
+}
+
+.checkbox-inline {
+  background-color: #fff;
+  color: #0F2043;
+  float: right;
+  margin-right: 65px;
 }
 
 .game-table {
@@ -412,6 +422,17 @@ footer {
   input {
     font-size: 13px;
     width: 92px;
+  }
+
+  .boardmessage {
+    margin: 0 auto;
+  }
+
+  .checkbox-inline {
+    background-color: #fff;
+    color: #0F2043;
+    margin-right: 84px;
+    width: 200px;
   }
 
   .forminputs {

@@ -76,38 +76,23 @@ const puzzleApi = require('./api.js')
 //   }
 // }
 
-const createAIGameSuccess = function (data) {
-  store.currentSymbol = 'o'
-  store.game = data.game
-  store.ai = true
-  for (let i = 0; i < store.game.cells.length; i++) {
-    $('#' + i).text(store.game.cells[i])
-  }
-  $('#lbl-board-message').text('Game created: X starts').css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
-  $('#game-table').show()
-  $('#game-table td').hover(function () { $(this).css({'background-color': '#79CEDC', 'color': 'black'}) }, function () { $(this).css({'background-color': '#0F2043', 'color': 'white'}) })
-}
-
-const createAIGameFailure = function () {
-  $('#lbl-board-message').text('Error Creating game').css({'background-color': 'white', 'color': 'red', 'width': '300px'})
-}
-
 const createGameSuccess = function (data) {
   store.currentSymbol = 'o'
   store.game = data.game
-  store.ai = false
   // gameWatcher = resourceWatcher(config.apiOrigin + '/games/' + store.game.id + '/watch', {Authorization: 'Token token=' + store.user.token})
   // gameWatcher.on('change', onChange)
   for (let i = 0; i < store.game.cells.length; i++) {
     $('#' + i).text(store.game.cells[i])
   }
+  $('#lbl-ai').css('visibility', 'visible')
   $('#lbl-board-message').text('Game created: X starts').css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
+  $('#lbl-game').text('Game ID: ' + store.game.id).css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
   $('#game-table').show()
   $('#game-table td').hover(function () { $(this).css({'background-color': '#79CEDC', 'color': 'black'}) }, function () { $(this).css({'background-color': '#0F2043', 'color': 'white'}) })
 }
 
 const createGameFailure = function () {
-  $('#lbl-board-message').text('Error Creating game').css({'background-color': 'white', 'color': 'red', 'width': '300px'})
+  $('#lbl-board-message').text('Error Creating game').css({'background-color': 'white', 'color': 'red', 'width': '200px'})
 }
 
 const checkCombination = function (array1, array2, move) {
@@ -533,6 +518,7 @@ const makeBestMove = function (array1, array2) {
 const updateAIGameSuccess = function (data) {
   store.game = data.game
   if (store.game.over) {
+    $('#lbl-ai').css('visibility', 'hidden')
     $('#lbl-board-message').text('You lose!').css({'color': 'red', 'background-color': 'white', 'width': '200px'})
     $('.td2').text((parseInt($('.td2').text()) + 1))
   } else {
@@ -545,7 +531,6 @@ const updateAIGameFailure = function (data) {
 }
 
 const updateGameSuccess = function (data) {
-  console.log('ai ? ' + store.ai)
   store.game = data.game
   if (store.ai === true && store.game.over === false) {
     let xCount = 0
@@ -614,6 +599,7 @@ const getSingleGameSuccess = function (data) {
     }
   }
   if (store.game.over === false) {
+    $('#lbl-ai').css('visibility', 'visible')
     if (xCount > oCount && xCount !== 0) {
       store.currentSymbol = 'x'
       $('#lbl-board-message').text("It's O's turn!").css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
@@ -625,6 +611,7 @@ const getSingleGameSuccess = function (data) {
       $('#lbl-board-message').text('Game resumed: X starts').css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
     }
   } else {
+    $('#lbl-ai').css('visibility', 'hidden')
     if (blankCount !== 0) {
       if (xCount > oCount) {
         $('#lbl-board-message').text('X won!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
@@ -651,6 +638,7 @@ const getSingleGameSuccess = function (data) {
   $('#txt-get-incomplete-game').val('')
   $('#game-table').show()
   $('#game-table td').hover(function () { $(this).css({'background-color': '#79CEDC', 'color': 'black'}) }, function () { $(this).css({'background-color': '#0F2043', 'color': 'white'}) })
+  $('#lbl-game').text('Game ID: ' + store.game.id).css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
 }
 
 const getSingleGameFailure = function () {
@@ -710,8 +698,6 @@ const getAllIncompleteGamesFailure = function (data) {
 module.exports = {
   createGameSuccess,
   createGameFailure,
-  createAIGameSuccess,
-  createAIGameFailure,
   updateGameSuccess,
   updateGameFailure,
   updateAIGameSuccess,

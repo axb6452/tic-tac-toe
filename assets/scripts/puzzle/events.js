@@ -46,6 +46,7 @@ const onInsertSymbol = function (event) {
       store.game.cells[parseInt(event.target.id)] = store.currentSymbol
       store.game.over = checkResult(store.game.cells)
       if (store.game.over) {
+        $('#lbl-ai').css('visibility', 'hidden')
         $('#lbl-board-message').text('X wins!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
         $('.td0').text((parseInt($('.td0').text()) + 1))
         const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
@@ -53,6 +54,7 @@ const onInsertSymbol = function (event) {
         countRows = 0
       } else {
         if (countRows === 3) {
+          $('#lbl-ai').css('visibility', 'hidden')
           $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
           $('.td1').text((parseInt($('.td1').text()) + 1))
           const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
@@ -71,6 +73,7 @@ const onInsertSymbol = function (event) {
       store.game.cells[parseInt(event.target.id)] = store.currentSymbol
       store.game.over = checkResult(store.game.cells)
       if (store.game.over) {
+        $('#lbl-ai').css('visibility', 'hidden')
         $('#lbl-board-message').text('O wins!').css({'color': 'green', 'background-color': 'white', 'width': '200px'})
         $('.td2').text((parseInt($('.td2').text()) + 1))
         const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
@@ -78,6 +81,7 @@ const onInsertSymbol = function (event) {
         countRows = 0
       } else {
         if (countRows === 3) {
+          $('#lbl-ai').css('visibility', 'hidden')
           $('#lbl-board-message').text("Ugh, it's a draw.").css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
           $('.td1').text((parseInt($('.td1').text()) + 1))
           const updateGameData = {'game': {'cell': {'index': parseInt(event.target.id), 'value': store.currentSymbol}, 'over': true}}
@@ -125,11 +129,13 @@ const onCreateGame = function (event) {
     .catch(puzzleUi.createGameFailure)
 }
 
-const onPlayVsAI = function (event) {
+const onPlayVsAICheck = function (event) {
   event.preventDefault()
-  puzzleApi.createGame()
-    .then(puzzleUi.createAIGameSuccess)
-    .catch(puzzleUi.createAIGameFailure)
+  if ($('#chk-ai').is(':checked')) {
+    store.ai = true // set ai mode to true
+  } else {
+    store.ai = false
+  }
 }
 
 const onGetSingleCompletedGame = function (event) {
@@ -172,6 +178,7 @@ const onBeforeUnload = function (event) {
 }
 
 const onLoad = function (event) {
+  $('#lbl-ai').css('visibility', 'hidden')
   // const xWins = localStorage.getItem('totalXWins') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalXWins')
   // const draws = localStorage.getItem('totalDraws') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalDraws')
   // const oWins = localStorage.getItem('totalOWins') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalOWins')
@@ -221,7 +228,7 @@ const addHandlers = function () {
   $('#btn-enterasO').on('click', onJoinAsO)
   $('#myModal').on('hidden.bs.modal', onClearInputs)
   $('#myModal2').on('hidden.bs.modal', onClearInputs)
-  $('#btn-machine-game').on('click', onPlayVsAI)
+  $('#chk-ai').on('change', onPlayVsAICheck)
 }
 
 module.exports = {
