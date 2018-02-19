@@ -86,7 +86,7 @@ const createGameSuccess = function (data) {
   }
   $('#lbl-ai').css('visibility', 'visible')
   $('#lbl-board-message').text('Game created: X starts').css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
-  $('#lbl-game').text('Game ID: ' + store.game.id).css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
+  $('#lbl-game').text('Game ID: ' + store.game.id).css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'}).css('visibility', 'visible')
   $('#game-table').show()
   $('#game-table td').hover(function () { $(this).css({'background-color': '#79CEDC', 'color': 'black'}) }, function () { $(this).css({'background-color': '#0F2043', 'color': 'white'}) })
 }
@@ -638,7 +638,7 @@ const getSingleGameSuccess = function (data) {
   $('#txt-get-incomplete-game').val('')
   $('#game-table').show()
   $('#game-table td').hover(function () { $(this).css({'background-color': '#79CEDC', 'color': 'black'}) }, function () { $(this).css({'background-color': '#0F2043', 'color': 'white'}) })
-  $('#lbl-game').text('Game ID: ' + store.game.id).css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'})
+  $('#lbl-game').text('Game ID: ' + store.game.id).css({'color': '#0F2043', 'background-color': 'white', 'width': '200px'}).css('visibility', 'visible')
 }
 
 const getSingleGameFailure = function () {

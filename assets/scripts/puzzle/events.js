@@ -178,7 +178,6 @@ const onBeforeUnload = function (event) {
 }
 
 const onLoad = function (event) {
-  $('#lbl-ai').css('visibility', 'hidden')
   // const xWins = localStorage.getItem('totalXWins') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalXWins')
   // const draws = localStorage.getItem('totalDraws') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalDraws')
   // const oWins = localStorage.getItem('totalOWins') === (undefined || null || '' || 'NaN' || '$0' || 'undefined' || 'null') ? '0' : localStorage.getItem('totalOWins')

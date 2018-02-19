@@ -24,6 +24,8 @@ const signInSuccess = function (data) {
   $('#change-password').hide()
   $('#game-table').hide()
   $('#lbl-board-message').text('Select an option below to begin').css({'color': '#0F2043', 'background-color': 'white', 'width': '300px'})
+  $('#lbl-ai').css('visibility', 'hidden')
+  $('#lbl-game').css('visibility', 'hidden')
 }
 
 const signInFailure = function () {
