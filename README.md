@@ -1,13 +1,12 @@
 # Tic-Tac-Toe
 
-## Techologies used:
+## Technologies used:
 
 1) HTML
 2) css
-3) Bootstrap-sass
-4) Bootstrap HTML templates
+3) sass - Bootstrap
 5) JavaScript - jQuery
-6) Atom.io framework
+6) Atom IDE
 
 ## Planning, Process, Problem Solving:
 
