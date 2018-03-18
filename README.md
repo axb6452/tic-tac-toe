@@ -37,7 +37,7 @@ To facilitate better logic and for easier access to code, I divided my JavaScrip
 
 During implementation, I would sometimes figure out a better approach than I had initially planned, with my draft wireframes, and for previous sections. For example, I noticed that it would be much more user friendly to have both the sign in and sign up features on one screen with success/error labels. This prompted me to deviate from my initial plan of having separate screens for sign in/ sign up.
 
-### Problems to be fixed/Developments to be made
+### Unsolved Problems
 
 - One major issue that I need to look closely into is Multiplayer functionality.
 Specifically, I need to ensure that connections to the API are closed in a
