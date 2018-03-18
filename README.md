@@ -1,6 +1,6 @@
 # Tic-Tac-Toe
 
-## Technologies used:
+## Technologies used
 
 1) HTML
 2) css
@@ -8,9 +8,9 @@
 5) JavaScript - jQuery
 6) Atom IDE
 
-## Planning, Process, Problem Solving:
+## Planning, Process, Problem Solving
 
-### Pre-project work:
+### Pre-project work
 
 Prior to writing code, I reviewed the game-project-scope study, particularly the user stories that I had crafted for the tic-tac-toe project, as follows:
 
@@ -25,7 +25,7 @@ I discussed my wireframes with consultants. My wireframes were approved, and for
 
 Based on this, I religiously followed the Suggested schedule, and began working my way through technical aspects of the project after the planning and set up phase. I elaborately detailed my project commits while working through each section.
 
-### Project work:
+### Project work
 
 As mentioned previously, my game plan was to address the core requirements by sticking to the schedule suggested. Before writing code, I would jot down, on a scrap book, pseudocode of what I expected to accomplish at the end of each section, together with samples of JavaScript programming concepts that I would need to achieve functionality.
 
@@ -37,7 +37,7 @@ To facilitate better logic and for easier access to code, I divided my JavaScrip
 
 During implementation, I would sometimes figure out a better approach than I had initially planned, with my draft wireframes, and for previous sections. For example, I noticed that it would be much more user friendly to have both the sign in and sign up features on one screen with success/error labels. This prompted me to deviate from my initial plan of having separate screens for sign in/ sign up.
 
-### Problems to be fixed/Developments to be made:
+### Problems to be fixed/Developments to be made
 
 - One major issue that I need to look closely into is Multiplayer functionality.
 Specifically, I need to ensure that connections to the API are closed in a
@@ -51,5 +51,5 @@ Intelligence (AI).
 ensure proper functionality under all circumstances.
 - Connect winning symbol combos with a straight line through their center points.
 
-### Wireframe and user stories:
+### Wireframe and user stories
 https://drive.google.com/open?id=1TLrmlNbaQwNedbvfTX9GRvXcKj10shRa
