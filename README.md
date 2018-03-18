@@ -45,11 +45,8 @@ timely manner, so as to prevent overloading of the backend server.
 - Another technological enhancement that I could make is incorporating link
 buttons to retrieve incomplete and complete games. This would prevent having to
 enter the game id each time in order to retrieve a game.
-- I would provide the option to play the game against Artifical
-Intelligence (AI).
-- I also need to properly resolve the win counter local storage issues and
-ensure proper functionality under all circumstances.
-- Connect winning symbol combos with a straight line through their center points.
+- Connect winning symbol combos with a straight line through their center points
+or adding animation to symbols for win/loss outcomes.
 
 ### Wireframe and user stories
 https://drive.google.com/open?id=1TLrmlNbaQwNedbvfTX9GRvXcKj10shRa
